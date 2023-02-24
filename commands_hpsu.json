@@ -1,0 +1,3442 @@
+{
+  "air_purge": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 95 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 95"
+    },
+    "description": {
+      "de": "Aktivierung der automatischen Entlüftung der ROTEX HPSU compact und des angeschlossenen Heizkreislaufs",
+      "en": "Activation of automatic bleeding of the ROTEX HPSU compact and the connected heating circuit"
+    },
+    "id": "air_purge",
+    "name": {
+      "de": "Entlüftungsfunktion",
+      "en": "Air Purge"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "anti_leg_day": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 01 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 01"
+    },
+    "description": {
+      "de": "Einstellung des Tages zur thermischen Desinfektion des Warmwasserspeichers",
+      "en": "Setting the day for the thermal disinfection of the circulating tank"
+    },
+    "id": "anti_leg_day",
+    "name": {
+      "de": "Anti-Legionellen Tag",
+      "en": "Anti-Legionella day"
+    },
+    "type": "value",
+    "value_code": {
+      "everyday": 2048,
+      "friday": 1280,
+      "monday": 256,
+      "off": 0,
+      "saturday": 1536,
+      "sunday": 1792,
+      "thursday": 1024,
+      "tuesday": 512,
+      "wednesday": 768
+    },
+    "writable": true
+  },
+  "anti_leg_temp": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 05 87 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 05 87"
+    },
+    "description": {
+      "de": "Einstellung der Warmwasser-Solltemperatur während der thermischen Desinfektion des Warmwasserspeichers",
+      "en": "Setting the hot water target temperature during thermal disinfection of the hot water circulating tank"
+    },
+    "divisor": 10,
+    "id": "anti_leg_temp",
+    "name": {
+      "de": "Antileg Temp",
+      "en": "Anti-Legionella temp"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "anti_leg_time": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA FD F4 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA FD F4"
+    },
+    "description": {
+      "de": "Einstellung der Startzeit der thermischen Desinfektion des Warmwasserspeichers",
+      "en": "Setting the start time of the thermal disinfection of the hot water circulating tank"
+    },
+    "id": "anti_leg_time",
+    "name": {
+      "de": "Antileg Zeit",
+      "en": "Anti-Legionella time"
+    },
+    "type": "value",
+    "writable": true
+  },
+  "aux_fct": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 96 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 96"
+    },
+    "description": {
+      "de": "Einstellung weist die Schaltbedingungen für den potenzialfreien AUX-Schaltkontakt zu",
+      "en": "Setting assigns the switching conditions to the potential-free AUX contact (toggle switch output A)"
+    },
+    "id": "aux_fct",
+    "name": {
+      "de": "Sonderfunktion Schaltkontakte",
+      "en": "AUX Fct"
+    },
+    "type": "value",
+    "writable": true
+  },
+  "aux_time": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 72 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 72"
+    },
+    "description": {
+      "de": "AUX-Schaltkontakt (A) schaltet erst verzögert, wenn die Schaltbedingung",
+      "en": "AUX switching contact (A) switches with a delay when the switching condition is pending for longer than the set time"
+    },
+    "divisor": 1,
+    "id": "aux_time",
+    "name": {
+      "de": "Wartezeit Sonderfunktion",
+      "en": "AUX time"
+    },
+    "type": "longint",
+    "unit": "sec",
+    "writable": true
+  },
+  "bpv": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 FB 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 FB"
+    },
+    "description": {
+      "de": "Aktuelle Position Mischventil 3UVB1 (100% = A, 0% = B)",
+      "en": "Current position of the mixing valve 3UVB1 (100% = A, 0% = B)"
+    },
+    "divisor": 1,
+    "id": "bpv",
+    "name": {
+      "de": "BPV",
+      "en": "BPV"
+    },
+    "type": "longint",
+    "unit": "percent",
+    "writable": false
+  },
+  "buh_s1_pow": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 69 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 69"
+    },
+    "description": {
+      "de": "Wärmeleistung des elektrischen Zuheizers bei Heizungsunterstützung Stufe 1",
+      "en": "Heat capacity of the ancillary electric heater in Stage 1 heating support"
+    },
+    "divisor": 0.1,
+    "id": "buh_s1_pow",
+    "name": {
+      "de": "Leistung EHS Stufe 1",
+      "en": "BUH s1 power"
+    },
+    "type": "longint",
+    "unit": "w",
+    "writable": true
+  },
+  "buh_s2_pow": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 6A 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 6A"
+    },
+    "description": {
+      "de": "Wärmeleistung des elektrischen Zuheizers bei Heizungsunterstützung Stufe 2",
+      "en": "Heat capacity of the ancillary electric heater in Stage 2 heating support"
+    },
+    "divisor": 0.1,
+    "id": "buh_s2_pow",
+    "name": {
+      "de": "Leistung EHS Stufe 2",
+      "en": "BUH s2 power"
+    },
+    "type": "longint",
+    "unit": "w",
+    "writable": true
+  },
+  "circ_pump_dhw": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 82 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 82"
+    },
+    "description": {
+      "de": "Einstellung zur Ansteuerung einer Zirkulationspumpe",
+      "en": "Setting for activating a circulation pump"
+    },
+    "id": "circ_pump_dhw",
+    "name": {
+      "de": "Zirkulation mit WW-Programm",
+      "en": "Circulation-Pump DHW"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "circ_pump_interval": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 5E 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 5E"
+    },
+    "description": {
+      "de": "Einstellung der Intervallsteuerung für optionale Zirkulationspumpe",
+      "en": "Setting the interval control for an optional circulation pump"
+    },
+    "id": "circ_pump_interval",
+    "name": {
+      "de": "Zirkulation Intervall",
+      "en": "Circulation-Pump Interval"
+    },
+    "type": "value",
+    "writable": true
+  },
+  "cool_setpoint_adj": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 13 59 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 13 59"
+    },
+    "description": {
+      "de": "Parallelverschiebung der Kühl-Kennlinie um den eingestellten Wert",
+      "en": "Parallel displacement of the cooling characteristic curve to match the set value"
+    },
+    "divisor": 10,
+    "id": "cool_setpoint_adj",
+    "name": {
+      "de": "Kühlsollwert Korrektur",
+      "en": "Cooling Setpoint adj"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "delta_t_ch": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 83 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 83"
+    },
+    "description": {
+      "de": "Sollspreizung für Raumheizung. Die Heizungsumwälzpumpe der ROTEX HPSU compact regelt den Durchfluss, um die in dem Parameter hinterlegte Sollspreizung zwischen Vorlauf-Solltemperatur und Rücklauftemperatur (tV, BH - tR1), zu erreichen",
+      "en": "Set outdoor temperature spread The ROTEX HPSU compact heating circulation pump controls the flow rate in order to achieve the set spread between the inflow target temperature and the return flow temperature (tV, BH – tR1)"
+    },
+    "divisor": 10,
+    "id": "delta_t_ch",
+    "name": {
+      "de": "Spreizung Mod HZ",
+      "en": "Delta-T CH"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "dhw_off_time": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 4E 3F 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 4E 3F"
+    },
+    "description": {
+      "de": "Einstellung der Sperrzeit nach Abschluss oder Abbruch eines Warmwasserbereitungszyklus",
+      "en": "Setting the block time following completion or interruption of a hot water generation cycle. New demand of hot water generation is satisfied only after expiry of this block time"
+    },
+    "divisor": 1,
+    "id": "dhw_off_time",
+    "name": {
+      "de": "WW Sperrzeit",
+      "en": "DHW Off Time"
+    },
+    "type": "float",
+    "writable": true
+  },
+  "ehs": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 F9 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 F9"
+    },
+    "description": {
+      "de": "Aktuelle Leistung des Backup-Heaters in kW",
+      "en": "Current output of the backup heater in kW"
+    },
+    "divisor": 1,
+    "id": "ehs",
+    "name": {
+      "de": "EHS",
+      "en": "EHS"
+    },
+    "type": "longint",
+    "unit": "kW",
+    "writable": false
+  },
+  "equi_func": {
+    "request": {
+      "can_id": "190",
+      "command": "A1 00 FA 06 D3 00 00"
+    },
+    "response": {
+      "can_id": "500",
+      "command": "32 10 FA 06 D3"
+    },
+    "description": {
+      "de": "Die Bivalenzfunktion ist für den Betrieb des optionalen Zuheizers aufgrund einer Backup-Anforderung (Raumheizbetrieb) relevant.",
+      "en": "The bivalence function is relevant for operation of the optional ancillary heater based on a backup demand (room heating operation)"
+    },
+    "id": "equi_func",
+    "name": {
+      "de": "Bivalenzfunktion",
+      "en": "Equilibrium Function"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "equi_temp": {
+    "request": {
+      "can_id": "190",
+      "command": "A1 00 FA 06 D4 00 00"
+    },
+    "response": {
+      "can_id": "500",
+      "command": "32 10 FA 06 D4"
+    },
+    "description": {
+      "de": "Einstellung beeinflusst die im Parameter [Sonderfunktion Schaltkontakte] definierte Wirkungsweise des potenzialfreien AUX-Schaltkontakts (Wechselschaltausgang A)",
+      "en": "Setting affects the operation of the potential-free AUX switching contact (toggle switch output A) defined in the parameter [AUX Fct]"
+    },
+    "divisor": 10,
+    "id": "equi_temp",
+    "name": {
+      "de": "Bivalenztemperatur",
+      "en": "Equilibrium Temp"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "error": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 13 88 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 13 88"
+    },
+    "description": {
+      "de": "Fehlercodename",
+      "en": "Error code"
+    },
+    "id": "error",
+    "name": {
+      "de": "Fehler",
+      "en": "error"
+    },
+    "type": "value",
+    "writable": false
+  },
+  "ext": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 F8 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 F8"
+    },
+    "description": {
+      "de": "Aktueller Energiemodus der Wärmepumpe: LT: EVU-Funktion HT/NT aktiv und Niedertarif. HT: EVU-Funktion HT/NT aktiv und Hochtarif. SGN: EVU-Funktion SMART GRID aktiv, Normalbetrieb. SG1: EVU-Funktion SMART GRID aktiv, Abwurf: kein Wärmepumpenbetrieb, keine Frostschutzfunktion. SG2: EVU-Funktion SMART GRID aktiv, Einschaltempfehlung, Betrieb mit höheren Solltemperaturen, billiger Strom. SG3:EVU-Funktion SMART GRID aktiv, Einschaltbefehl und Speicherladung auf 70 °C, billiger Strom. - - -: Kein externer Modus aktiv, Wärmepumpe arbeitet im normalen Betrieb.",
+      "en": "Current energy mode of the heat pump: LT: EVU function HT/NT active and low tariff. HT: EVU function HT/NT active and high tariff. SGN: EVU function SMART GRID active, normal mode. SG1: EVU function SMART GRID active, disconnection: no heat pump operation, no frost protection function. SG2: EVU function SMART GRID active, switch on recommendation, mode with higher set temperatures, cheap power. SG3: EVU function SMART GRID active, switch on command and storage tank charging to 70 C, cheap power - - -: No external mode active, heat pump works in normal mode."
+    },
+    "id": "ext",
+    "name": {
+      "de": "Ext",
+      "en": "Ext"
+    },
+    "type": "value",
+    "writable": false
+  },
+  "flow_rate": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 DA 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 DA"
+    },
+    "description": {
+      "de": "Angezeigt wird der gefilterte Wert des aktuellen Volumenstroms in Liter pro Stunde.",
+      "en": "The filtered value of the current volume flow in litres per hour"
+    },
+    "divisor": 1,
+    "id": "flow_rate",
+    "name": {
+      "de": "Durchfluss",
+      "en": "Flow Rate"
+    },
+    "type": "longint",
+    "unit": "lh",
+    "writable": false
+  },
+  "func_heating": {
+    "request": {
+      "can_id": "190",
+      "command": "A1 00 FA 06 D2 00 00"
+    },
+    "response": {
+      "can_id": "500",
+      "command": "32 10 FA 06 D2"
+    },
+    "description": {
+      "de": "Einstellung ob zusätzlicher Wärmeerzeuger (WEZ) für Warmwasserbereitung und Heizungsunterstützung vorhanden ist",
+      "en": "Setting as to whether there is an additional heat generator (WEZ) for hot water generation and heating support"
+    },
+    "id": "func_heating",
+    "name": {
+      "de": "Funktion EHS",
+      "en": "Function Heating"
+    },
+    "type": "value",
+    "writable": true
+  },
+  "hc_adapt": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 15 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 15"
+    },
+    "description": {
+      "de": "Heizkreis Adaption",
+      "en": "HC Adaptation"
+    },
+    "id": "hc_adapt",
+    "name": {
+      "de": "Heizkreis Adaption",
+      "en": "HC Adaption"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 256
+    },
+    "writable": true
+  },
+  "hc_func": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 41 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 41"
+    },
+    "description": {
+      "de": "Einstellung definiert Art der Vorlauftemperaturregelung",
+      "en": "Setting defines the type of inflow temperature control"
+    },
+    "id": "hc_func",
+    "name": {
+      "de": "HK Funktion",
+      "en": "HC Function"
+    },
+    "type": "value",
+    "value_code": {
+      "fixed value": 1,
+      "weather controlled": 0
+    },
+    "writable": true
+  },
+  "heat_slope": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 0E 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 0E"
+    },
+    "description": {
+      "de": "Heizkurve",
+      "en": "Heat Slope"
+    },
+    "divisor": 100,
+    "id": "heat_slope",
+    "name": {
+      "de": "Heizkurve",
+      "en": "Heat-Slope"
+    },
+    "type": "float",
+    "writable": true
+  },
+  "ht_nt_contact": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 70 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 70"
+    },
+    "description": {
+      "de": "Festlegung, ob der HT-/NT-Eingang als Öffner- oder Schließerkontakt ausgewertet wird",
+      "en": "Specifies whether the HT/NT input is an NC or NO contact"
+    },
+    "id": "ht_nt_contact",
+    "name": {
+      "de": "HT/NT Anschluss",
+      "en": "HT/NT Contact"
+    },
+    "type": "value",
+    "value_code": {
+      "NC": 1,
+      "NO": 0
+    },
+    "writable": true
+  },
+  "ht_nt_func": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 6F 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 6F"
+    },
+    "description": {
+      "de": "Einstellung, welche Wärmequellen ausgeschaltet werden, wenn bei einem Niedertarif-Netzanschluss das vom Energieversorgungsunternehmen (EVU) ausgegebene Signal für Hochtarif empfangen wird.",
+      "en": "Setting which specifies which heat sources are switched off when the standard signal is received from the energy supply company (EVU) in the case of the customer having an off-peak tariff network connection"
+    },
+    "id": "ht_nt_func",
+    "name": {
+      "de": "HT/NT Funktion",
+      "en": "HT/NT Function"
+    },
+    "type": "value",
+    "value_code": {
+      "all off": 3,
+      "compressor off": 1,
+      "compressor off, reserve heating off": 2,
+      "deactivated": 0
+    },
+    "writable": true
+  },
+  "hyst_hp": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 91 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 91"
+    },
+    "description": {
+      "de": "Einstellung der Hysterese für die Warmwasserbereitung. Die Warmwasserbereitung wird aktiviert, wenn die am Warmwasserfühler gemessene Temperatur unter die aktuelle Warmwasser-Solltemperatur minus dem hier eingestellten Wert liegt. Eine Warmwasserbereitung ist beendet, wenn die am Warmwasserfühler gemessene Temperatur über der aktuellen Warmwasser-Solltemperatur liegt",
+      "en": "Switching threshold hot water charging. Setting of the temperature difference to which the temperature in the domestic hot water storage tank compared to the current target hot water temperature [T-DHW Setpoint] can drop before the heat pump is switched on to provide hot water"
+    },
+    "divisor": 10,
+    "id": "hyst_hp",
+    "name": {
+      "de": "Hysterese WW",
+      "en": "Hyst HP"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "hzu": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 6C 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 6C"
+    },
+    "description": {
+      "de": "Heizungsunterstützung aus Warmwasserspeicher, wenn Mindesttemperatur überschritten ist",
+      "en": "Heating support from domestic hot water storage tanks when the minimum temperature is exceeded"
+    },
+    "id": "hzu",
+    "name": {
+      "de": "HZ Unterstützung",
+      "en": "HUZ"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "indoor_unit": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 99 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 99"
+    },
+    "description": {
+      "de": "Typ Wärmepumpeninnengerät",
+      "en": "Type of interior heat pump unit"
+    },
+    "id": "indoor_unit",
+    "name": {
+      "de": "Innengerät",
+      "en": "Indoor unit"
+    },
+    "type": "value",
+    "value_code": {
+      " ": 0,
+      "304": 1,
+      "308": 2,
+      "508": 3,
+      "516": 4
+    },
+    "writable": true
+  },
+  "insulation": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 0C 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 0C"
+    },
+    "description": {
+      "de": "Einstellung des Gebäudedämmstandards. Dadurch werden die gemittelte Außentemperatur und die automatischen Anpassungen der Heizkurve und der Heizzeiten beeinflusst",
+      "en": "Setting the insulation standard of the building. This affects the way the heating curve and the heating times automatically adapt to the outside temperature."
+    },
+    "id": "insulation",
+    "name": {
+      "de": "Gebäudedämmung",
+      "en": "Insulation"
+    },
+    "type": "value",
+    "value_code": {
+      "good": 2048,
+      "low": 512,
+      "normal": 1024,
+      "off": 0,
+      "very good": 3072
+    },
+    "writable": true
+  },
+  "interlink": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 79 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 79"
+    },
+    "description": {
+      "de": "Konfiguration für Anlagen, die mit 2 verschiedenen Vorlauf-Solltemperaturen betrieben werden",
+      "en": "Configuration for systems operating with 2 different inflow target temperatures"
+    },
+    "id": "interlink",
+    "name": {
+      "de": "Interlinkfunktion",
+      "en": "Interlink fct"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "max_dhw_loading": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 80 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 80"
+    },
+    "description": {
+      "de": "Einstellung begrenzt den Zeitraum für die Warmwasserbereitung auf den eingestellten Sollwert",
+      "en": "Setting limits the time period for hot water generation to the set target value"
+    },
+    "divisor": 1,
+    "id": "max_dhw_loading",
+    "name": {
+      "de": "Max WW Ladezeit",
+      "en": "Max DHW loading"
+    },
+    "type": "longint",
+    "unit": "min",
+    "writable": true
+  },
+  "max_perf_pump": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 7E 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 7E"
+    },
+    "description": {
+      "de": "Obergrenze für die Modulation der Pumpenleistung",
+      "en": "Upper limit for modulation of the pump output"
+    },
+    "divisor": 1,
+    "id": "max_perf_pump",
+    "name": {
+      "de": "Max Leistung Pumpe",
+      "en": "Max Perform Pump"
+    },
+    "type": "longint",
+    "unit": "percent",
+    "writable": true
+  },
+  "max_pressure": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 07 27 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 07 27"
+    },
+    "description": {
+      "de": "Definiert den maximalen Wasserdruck",
+      "en": "Defines the maximum water pressure"
+    },
+    "divisor": 1000,
+    "id": "max_pressure",
+    "name": {
+      "de": "Max Druck",
+      "en": "Max Pressure"
+    },
+    "type": "float",
+    "unit": "bar",
+    "writable": true
+  },
+  "max_pressure_drop": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 07 26 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 07 26"
+    },
+    "description": {
+      "de": "Definiert den maximal akzeptablen Druckverlust in der Heizungsanlage",
+      "en": "Defines the maximum acceptable pressure drop in the heating system"
+    },
+    "divisor": 1000,
+    "id": "max_pressure_drop",
+    "name": {
+      "de": "Max Druckverlust",
+      "en": "Max Pressure drop"
+    },
+    "type": "float",
+    "unit": "bar",
+    "writable": true
+  },
+  "max_t_flow": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 28 00 00 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 28"
+    },
+    "description": {
+      "de": "Die ermittelte Vorlauf-Solltemperatur des Heizkreises wird auf den hier eingestellten Maximalwert begrenzt",
+      "en": "The inflow temperature determined for the heating circuit is limited to the maximum value set here"
+    },
+    "divisor": 10,
+    "id": "max_t_flow",
+    "name": {
+      "de": "Max T-Vorlauf",
+      "en": "Max T-Flow"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "max_tout_cool": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 13 5C 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 13 5C"
+    },
+    "description": {
+      "de": "Einstellung, bei welcher Außentemperatur die niedrigste Kühlvorlauf-Solltemperatur vorgegeben wird",
+      "en": "Setting to determine from which outdoor temperature the lowest cooling flow temperature"
+    },
+    "divisor": 10,
+    "id": "max_tout_cool",
+    "name": {
+      "de": "Max Kühlen A-Temp",
+      "en": "Max T-Out Cooling"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "min_perf_pump": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 7F 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 7F"
+    },
+    "description": {
+      "de": "Untergrenze für die Modulation der Pumpenleistung",
+      "en": "Lower limit for modulation of the pump output"
+    },
+    "divisor": 1,
+    "id": "min_perf_pump",
+    "name": {
+      "de": "Min Leistung Pumpe",
+      "en": "Min Perform Pump"
+    },
+    "type": "longint",
+    "unit": "percent",
+    "writable": true
+  },
+  "min_pressure": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 07 28 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 07 28"
+    },
+    "description": {
+      "de": "Definiert den minimalen Wasserdruck",
+      "en": "Defines the minimum water pressure"
+    },
+    "divisor": 1000,
+    "id": "min_pressure",
+    "name": {
+      "de": "Min Druck",
+      "en": "Min Pressure"
+    },
+    "type": "float",
+    "unit": "bar",
+    "writable": true
+  },
+  "min_t_flow": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 2B 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 2B"
+    },
+    "description": {
+      "de": "Die ermittelte Vorlauf-Solltemperatur des Heizkreises wird auf den hier eingestellten Minimalwert begrenzt",
+      "en": "The inflow temperature determined for the heating circuit is limited to the minimum value set here"
+    },
+    "divisor": 10,
+    "id": "min_t_flow",
+    "name": {
+      "de": "Min T-Vorlauf",
+      "en": "Min T-Flow"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "min_t_flow_cool": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 13 63 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 13 63"
+    },
+    "description": {
+      "de": "Einstellung der absoluten Untergrenze der Kühlvorlauf-Solltemperatur. Begrenzung wirkt, falls aus anderen Parametereinstellungen eine niedrigere Kühlvorlauf-Solltemperatur ermittelt würde",
+      "en": "Setting the absolute lower limit of the cooling inflow target temperature. The limitation is effective if a lower cooling inflow target temperature is determined based on other parameter settings"
+    },
+    "divisor": 10,
+    "id": "min_t_flow_cool",
+    "name": {
+      "de": "Min VL-Soll Kühlen",
+      "en": "Min T-Flow Cooling"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "mode": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 F6 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 F6"
+    },
+    "description": {
+      "de": "Aktueller Modus der Wärmepumpe: ---: No heating or cooling demand : Heating : Cooling : Domestic hot water generation : Automatic defrosting function active",
+      "en": "Current mode of the heat pump: ---: No heating or cooling demand : Heating : Cooling : Domestic hot water generation : Automatic defrosting function active"
+    },
+    "id": "mode",
+    "name": {
+      "de": "Modus",
+      "en": "Mode"
+    },
+    "type": "value",
+    "value_code": {
+      "cooling": 2,
+      "defrost": 3,
+      "heating": 1,
+      "standby": 0
+    },
+    "writable": false
+  },
+  "mode_01": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 12 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 12"
+    },
+    "description": {
+      "de": "Modus Rotex",
+      "en": "Mode Rotex"
+    },
+    "id": "mode_01",
+    "name": {
+      "de": "Modus",
+      "en": "Mode"
+    },
+    "type": "value",
+    "value_code": {
+      "auto 1": 11,
+      "auto 2": 12,
+      "cool": 17,
+      "heat": 3,
+      "sink": 4,
+      "standby": 1,
+      "summer": 5
+    },
+    "writable": true
+  },
+  "modus_sg": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 94 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 94"
+    },
+    "description": {
+      "de": "Nur wenn Parameter [SMART GRID] = 1: Dient zu einer möglichen Soll-Temperaturerhöhung bei einem SMART GRID-Einschaltbefehl",
+      "en": "Only if parameter [SMART GRID] = 1:Used for a possible target temperature increase in the case of aSMART GRID start command"
+    },
+    "id": "modus_sg",
+    "name": {
+      "de": "Modus SG",
+      "en": "Mode SG"
+    },
+    "type": "value",
+    "value_code": {
+      "comfort": 0,
+      "eco": 2,
+      "standard": 1
+    },
+    "writable": true
+  },
+  "one_hot_water": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 44 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 44"
+    },
+    "description": {
+      "de": "Start der einmaligen Aufheizung des Warmwassers auf den eingestellten Sollwert",
+      "en": "Start of the one-off heating up of the hot water and the set value [T-DHW Setpoint 1], independent of the heating programmes"
+    },
+    "id": "one_hot_water",
+    "name": {
+      "de": "1x Warmwasser",
+      "en": "1x Hot Water"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "out_temp_adapt": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0C 1F 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0C 1F"
+    },
+    "description": {
+      "de": "Individuelle Anpassung für den Messwert der für die Regelung relevanten Außentemperatur",
+      "en": "Individual adapting for the measured value of the outdoor temperature relevant for the Controller"
+    },
+    "divisor": 10,
+    "id": "out_temp_adapt",
+    "name": {
+      "de": "AF Anpassung",
+      "en": "Outside Temp Adaptation"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "outdoor_type": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 9A 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 9A"
+    },
+    "description": {
+      "de": "Typ Wärmepumpenaußengerät",
+      "en": "Type exterior heat pump unit"
+    },
+    "id": "outdoor_type",
+    "name": {
+      "de": "Aussengerät",
+      "en": "Outdoor type"
+    },
+    "type": "value",
+    "value_code": {
+      " ": 0,
+      "11 kW": 4,
+      "14 kW": 5,
+      "16 kW": 6,
+      "4 kW": 1,
+      "6 kW": 2,
+      "8 kW": 3
+    },
+    "writable": true
+  },
+  "outside_conf": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 09 61 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 09 61"
+    },
+    "description": {
+      "de": "Konfiguration des optionalen Außentemperaturfühlers RoCon OT1",
+      "en": "Configuration of the optional external temperature sensor RoCon OT1"
+    },
+    "id": "outside_conf",
+    "name": {
+      "de": "Konfiguration T-Aussen",
+      "en": "Outside Config"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 4,
+      "on": 5
+    },
+    "writable": true
+  },
+  "posmix": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 9B 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 9B"
+    },
+    "description": {
+      "de": "aktuelle Stellung des 3-Wege-Umschaltventils 3UV DHW. 0 %: Stellung A (Raumheizung) 100 %: Stellung B (Warmwasserbereitung)",
+      "en": "The current position of the 3UV DHW 3-way switch valve is displayed. 0%: position A (room heating) 100%: position B (domestic hot water generation)"
+    },
+    "divisor": 1,
+    "id": "posmix",
+    "name": {
+      "de": "Mischer Position",
+      "en": "Mixer Position"
+    },
+    "type": "longint",
+    "unit": "percent",
+    "writable": false
+  },
+  "power_biv": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 6B 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 6B"
+    },
+    "description": {
+      "de": "Einstellung begrenzt Leistung der Heizungsunterstützung",
+      "en": "Setting limits the output of the heating support"
+    },
+    "divisor": 0.1,
+    "id": "power_biv",
+    "name": {
+      "de": "Leistung BIV",
+      "en": "Power BIV"
+    },
+    "type": "longint",
+    "unit": "w",
+    "writable": true
+  },
+  "power_dhw": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 68 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 68"
+    },
+    "description": {
+      "de": "Wärmeleistung des elektrischen Zuheizers für Warmwasserbereitung",
+      "en": "Heating output of electric auxiliary heater for hot water generation"
+    },
+    "divisor": 0.1,
+    "id": "power_dhw",
+    "name": {
+      "de": "Leistung WW",
+      "en": "Power DHW"
+    },
+    "type": "longint",
+    "unit": "w",
+    "writable": true
+  },
+  "pres_conf": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 09 61 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 09 61"
+    },
+    "description": {
+      "de": "Konfiguration des Sensors zur Erfassung des Wasserdrucks der Anlage",
+      "en": "Configuring the sensor for assessment of the system water pressure"
+    },
+    "id": "pres_conf",
+    "name": {
+      "de": "Konfiguration Druck",
+      "en": "Pressure Config"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 10244,
+      "on": 26628
+    },
+    "writable": true
+  },
+  "pump": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 F7 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 F7"
+    },
+    "description": {
+      "de": "Aktuelle Leistung der internen Heizungsumwälzpumpe in %",
+      "en": "Actual output of the internal heating circulation pump in %"
+    },
+    "divisor": 1,
+    "id": "pump",
+    "name": {
+      "de": "Pump",
+      "en": "Pump"
+    },
+    "type": "longint",
+    "unit": "percent",
+    "writable": false
+  },
+  "qboh": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 09 1C 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 09 1C"
+    },
+    "description": {
+      "de": "Angezeigt wird die Wärmemenge des zusätzlichen Wärmeerzeugers für die Warmwasserbereitung in Wh.",
+      "en": "The amount of heat in the additional heat generator for hot water generation is displayed in Wh."
+    },
+    "divisor": 0.1,
+    "id": "qboh",
+    "name": {
+      "de": "EHS für DHW",
+      "en": "Qboh"
+    },
+    "type": "longint",
+    "unit": "wh",
+    "writable": false
+  },
+  "qch": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 A7 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 A7"
+    },
+    "description": {
+      "de": "Angezeigt wird die Wärmemenge der Wärmepumpe für den Heizbetrieb in Wh.",
+      "en": "The quantity of heat in the heat pump for heating is displayed in Wh."
+    },
+    "divisor": 0.1,
+    "id": "qch",
+    "name": {
+      "de": "Energie Heizung",
+      "en": "Qch"
+    },
+    "type": "longint",
+    "unit": "wh",
+    "writable": false
+  },
+  "qchhp": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 09 20 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 09 20"
+    },
+    "description": {
+      "de": "Angezeigt wird die Wärmemenge des zusätzlichen Wärmeerzeugers für den Heizbetrieb in Wh.",
+      "en": "The amount of heat in the additional heat generator for heating mode is displayed in Wh."
+    },
+    "divisor": 0.1,
+    "id": "qchhp",
+    "name": {
+      "de": "EHS für CH",
+      "en": "Qchhp"
+    },
+    "type": "longint",
+    "unit": "wh",
+    "writable": false
+  },
+  "qdhw": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 09 2C 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 09 2C"
+    },
+    "description": {
+      "de": "Angezeigt wird die Wärmemenge für die Warmwasserbereitung in Wh.",
+      "en": "The quantity of heat for hot water generation is displayed in Wh."
+    },
+    "divisor": 0.1,
+    "id": "qdhw",
+    "name": {
+      "de": "Energie für WW",
+      "en": "Qdhw"
+    },
+    "type": "longint",
+    "unit": "wh",
+    "writable": false
+  },
+  "qsc": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 A6 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 A6"
+    },
+    "description": {
+      "de": "Angezeigt wird die Wärmemenge der Wärmepumpe für den Kühlbetrieb in Wh.",
+      "en": "The quantity of heat in the heat pump for cooling is displayed in Wh."
+    },
+    "divisor": 0.1,
+    "id": "qsc",
+    "name": {
+      "de": "Energie Kühlung",
+      "en": "Qsc"
+    },
+    "type": "longint",
+    "unit": "wh",
+    "writable": false
+  },
+  "quiet": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 07 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 07"
+    },
+    "description": {
+      "de": "Shows the status of the whisper mode.",
+      "en": "Shows the status of the whisper mode."
+    },
+    "id": "quiet",
+    "name": {
+      "de": "quiet",
+      "en": "quiet"
+    },
+    "type": "value",
+    "value_code": {
+      "activated": 1,
+      "off": 0,
+      "only at night": 2
+    },
+    "writable": false
+  },
+  "quiet_mode": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 96 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 96"
+    },
+    "description": {
+      "de": "Modus für geräuscharmen Betrieb bei reduzierter Leistung",
+      "en": "Mode for low-noise operation with reduced output"
+    },
+    "id": "quiet_mode",
+    "name": {
+      "de": "Flüsterbetrieb",
+      "en": "Quiet Mode"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1,
+      "only at night": 2
+    },
+    "writable": true
+  },
+  "qwp": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 09 30 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 09 30"
+    },
+    "description": {
+      "de": "Angezeigt wird die gesamte Wärmemenge der Wärmepumpe in Wh.",
+      "en": "The total amount of heat in the heat pump is displayed in Wh."
+    },
+    "divisor": 0.1,
+    "id": "qwp",
+    "name": {
+      "de": "Energie erzeugt",
+      "en": "QWP"
+    },
+    "type": "longint",
+    "unit": "wh",
+    "writable": false
+  },
+  "room_therm": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 78 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 78"
+    },
+    "description": {
+      "de": "Konfiguration eines am Anschluss J16 der ROTEX HPSU compact angeschlossenen Raumthermostats mit potenzialfreien Kontakten",
+      "en": "Configuration of a room thermostat connected to the port J16 on the ROTEX HPSU compact using potential-free contacts"
+    },
+    "id": "room_therm",
+    "name": {
+      "de": "Raumthermostat",
+      "en": "Room thermostat"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "rt": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 FA 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 FA"
+    },
+    "description": {
+      "de": "Parameter [Room thermostat] / [Interlink fct]",
+      "en": "Parameter [Room thermostat] / [Interlink fct]"
+    },
+    "id": "rt",
+    "name": {
+      "de": "RT",
+      "en": "RT"
+    },
+    "type": "value",
+    "writable": false
+  },
+  "runtime_comp": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 A5 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 A5"
+    },
+    "description": {
+      "de": "Angezeigt wird die Laufzeit des Kühltemittelverdichters in h.",
+      "en": "The running time of the refrigerant compressor is displayed in h."
+    },
+    "divisor": 1,
+    "id": "runtime_comp",
+    "name": {
+      "de": "Laufzeit Kompressor",
+      "en": "Runtime Compressor"
+    },
+    "type": "longint",
+    "unit": "hour",
+    "writable": false
+  },
+  "runtime_pump": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 A4 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 A4"
+    },
+    "description": {
+      "de": "Angezeigt wird die Laufzeit der internen Heizungsumwälzpumpe in h.",
+      "en": "The running time of the internal heating circulation pump is displayed in h."
+    },
+    "divisor": 1,
+    "id": "runtime_pump",
+    "name": {
+      "de": "Laufzeit Pumpe",
+      "en": "Runtime Pump"
+    },
+    "type": "longint",
+    "unit": "hour",
+    "writable": false
+  },
+  "screed": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 1A 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 1A"
+    },
+    "description": {
+      "de": "Funktion zur Estrichtrocknung",
+      "en": "Function for screed drying"
+    },
+    "id": "screed",
+    "name": {
+      "de": "Estrich",
+      "en": "Screed"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 256
+    },
+    "writable": true
+  },
+  "setpoint_pressure": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 07 25 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 07 25"
+    },
+    "description": {
+      "de": "Definiert den Soll-Wasserdruck",
+      "en": "Defines the set water pressure"
+    },
+    "divisor": 1000,
+    "id": "setpoint_pressure",
+    "name": {
+      "de": "Soll Druck",
+      "en": "Set Point Pressure"
+    },
+    "type": "float",
+    "unit": "bar",
+    "writable": true
+  },
+  "smart_grid": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 93 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 93"
+    },
+    "description": {
+      "de": "Auswertung des SG-Signals",
+      "en": "Smart Grid"
+    },
+    "id": "smart_grid",
+    "name": {
+      "de": "SMART GRID",
+      "en": "SMART GRID"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": true
+  },
+  "start_tout_cool": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 13 5B 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 13 5B"
+    },
+    "description": {
+      "de": "Einstellung, ab welcher Außentemperatur der Kühlbetrieb mit der höchsten Kühlvorlauf-Solltemperatur startet",
+      "en": "Setting from which outdoor temperature the cooling operation starts with the highest cooling flow setpoint temperature"
+    },
+    "divisor": 10,
+    "id": "start_tout_cool",
+    "name": {
+      "de": "Start Kühlen A-Temp",
+      "en": "Start T-Out Cooling"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "status_pump": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 0A 8C 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 0A 8C"
+    },
+    "description": {
+      "de": "Angezeigt wird der aktuelle Status der internen Heizungsumwälzpumpe der ROTEX HPSU compact.",
+      "en": "The current status of the internal heat circulation pump in the ROTEX HPSU compact is displayed."
+    },
+    "id": "status_pump",
+    "name": {
+      "de": "Status Kesselpumpe",
+      "en": "Status HS Pump"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "on": 1
+    },
+    "writable": false
+  },
+  "storage_conf": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 09 61 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 09 61"
+    },
+    "description": {
+      "de": "Konfiguration der Warmwasserbereitung",
+      "en": "Configuration of water heating"
+    },
+    "id": "storage_conf",
+    "name": {
+      "de": "Konfiguration T-WW",
+      "en": "Storage Config"
+    },
+    "type": "value",
+    "value_code": {
+      "off": 0,
+      "sensor": 4,
+      "thermostat": 2
+    },
+    "writable": true
+  },
+  "sw_vers_01": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 99 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 99"
+    },
+    "description": {
+      "de": "Software Version 1",
+      "en": "Version SW 1"
+    },
+    "divisor": 1,
+    "id": "sw_vers_01",
+    "name": {
+      "de": "Version SW 1",
+      "en": "Version SW 1"
+    },
+    "type": "longint",
+    "writable": false
+  },
+  "sw_vers_02": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 B4 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 B4"
+    },
+    "description": {
+      "de": "Software Version 2",
+      "en": "Version SW 2"
+    },
+    "divisor": 1,
+    "id": "sw_vers_02",
+    "name": {
+      "de": "Version SW 2",
+      "en": "Version SW 2"
+    },
+    "type": "longint",
+    "writable": false
+  },
+  "sw_vers_03": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 02 4B 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 02 4B"
+    },
+    "description": {
+      "de": "Software version 3",
+      "en": "Version SW 3"
+    },
+    "divisor": 1,
+    "id": "sw_vers_03",
+    "name": {
+      "de": "Version SW 3",
+      "en": "Version SW 3"
+    },
+    "type": "longint",
+    "writable": false
+  },
+  "t_absence": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 3D 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 3D"
+    },
+    "description": {
+      "de": "Raum-Solltemperatur für die Absenkzeiten der temporären Zeitprogramme [Abwesend] + [Urlaub]",
+      "en": "Target room temperature for the setback times for the temporary timer programmes  [Away] and [Vacation]"
+    },
+    "divisor": 10,
+    "id": "t_absence",
+    "name": {
+      "de": "T-Abwesend",
+      "en": "T-Absence"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_dhw": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 0E 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 0E"
+    },
+    "description": {
+      "de": "Angezeigt wird die aktuelle Temperatur des Warmwasserspeichers in C. Sollte keine Warmwasserfunktion aktiviert sein, wird --- angezeigt.",
+      "en": "The current temperature of the hot water storage tank is displayed in C. If there is no hot water function activated, --- is displayed."
+    },
+    "divisor": 10,
+    "id": "t_dhw",
+    "name": {
+      "de": "T-WW",
+      "en": "T-DHW"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_dhw1": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 FD 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 FD"
+    },
+    "description": {
+      "de": "Aktuelle Temperatur im Warmwasserspeicher (tDHW1)",
+      "en": "Current temperature in domestic hot water storage tank (tDHW1)"
+    },
+    "divisor": 10,
+    "id": "t_dhw1",
+    "name": {
+      "de": "Tdhw",
+      "en": "Tdhw"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_dhw_1_min": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 73 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 73"
+    },
+    "description": {
+      "de": "Schaltschwelle Speichertemperatur (Tdhw) für AUX-Schaltkontakt",
+      "en": "Switching threshold storage tank temperature (Tdhw) for AUX switching contact (see parameter [AUX Fct])"
+    },
+    "divisor": 10,
+    "id": "t_dhw_1_min",
+    "name": {
+      "de": "Schaltschwelle TDHW",
+      "en": "T-DHW 1 min"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_dhw_set": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 03 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 03"
+    },
+    "description": {
+      "de": "aktuelle Warmwasser-Solltemperatur in C. Sollte keine Warmwasserfunktion aktiviert sein, wird --- angezeigt. Der aktuelle Sollwert ist hier immer der Maximalwert aller für diesen Warmwasserkreis relevanten Anforderungen.",
+      "en": "The current target hot water temperature is displayed in C. If there is no hot water function activated, --- is displayed. The current set value is here always the maximum value of all relevant demands for this hot water circuit"
+    },
+    "divisor": 10,
+    "id": "t_dhw_set",
+    "name": {
+      "de": "T-WW Soll",
+      "en": "T-DHW Setpoint"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_dhw_setpoint1": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 13 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 13"
+    },
+    "description": {
+      "de": "Sollwert der Warmwassertemperatur in Grad C, welche für den 1. Schaltzeitzyklus der Zeitprogramme [Automatik 1] und [Automatik 2] gilt",
+      "en": "Nominal value of the hot water temperature in C, which is valid for the first ignition cycle"
+    },
+    "divisor": 10,
+    "id": "t_dhw_setpoint1",
+    "name": {
+      "de": "T-WW Soll 1",
+      "en": "T-ACS nom 1"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_dhw_setpoint2": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 0A 06 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 0A 06"
+    },
+    "description": {
+      "de": "Sollwert der Warmwassertemperatur in Grad C, welche für den 2. Schaltzeitzyklus der Zeitprogramme [Automatik 1] und [Automatik 2] gilt",
+      "en": "Nominal value of the hot water temperature in C, which is valid for the second ignition cycle"
+    },
+    "divisor": 10,
+    "id": "t_dhw_setpoint2",
+    "name": {
+      "de": "T-WW Soll 1",
+      "en": "T-ACS nom 2"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_dhw_setpoint3": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 3E 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 3E"
+    },
+    "description": {
+      "de": "Sollwert der Warmwassertemperatur in Grad C, welche für den 3. Schaltzeitzyklus der Zeitprogramme [Automatik 1] und [Automatik 2] gilt",
+      "en": "Nominal value of the hot water temperature in C, which is valid for the third ignition cycle"
+    },
+    "divisor": 10,
+    "id": "t_dhw_setpoint3",
+    "name": {
+      "de": "T-WW Soll 1",
+      "en": "T-ACS nom 3"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_ext": {
+    "request": {
+      "can_id": "310",
+      "command": "61 00 FA 0A 0C 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "62 10 FA 0A 0C"
+    },
+    "description": {
+      "de": "Angezeigt wird die gemittelte Aussentemperatur in C.",
+      "en": "The average external temperature is displayed C."
+    },
+    "divisor": 10,
+    "id": "t_ext",
+    "name": {
+      "de": "T-Aussen",
+      "en": "T-Outside"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_flow_ch_adj": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 A0 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 A0"
+    },
+    "description": {
+      "de": "Nur wenn Parameter [Interlinkfunktion] = Ein. Vorlauf-Solltemperatur wird bei geschlossenem RT-Schaltkontakt Kühlen um den eingestellten Wert erhöht",
+      "en": "Only when parameter [Interlink fct] = On. With a closed cooling RT switching contact, the inflow target temperature is increased by the set value"
+    },
+    "divisor": 10,
+    "id": "t_flow_ch_adj",
+    "name": {
+      "de": "Anpassung T-VL Heizen",
+      "en": "T-Flow CH adj"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_flow_cool": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 03 DD 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 03 DD"
+    },
+    "description": {
+      "de": "Einstellung der Kühlvorlauf-Solltemperatur (Festwert) bei aktivem Kühlbetrieb",
+      "en": "Setting the cooling inflow target temperature (fixed value) when cooling mode is active"
+    },
+    "divisor": 10,
+    "id": "t_flow_cool",
+    "name": {
+      "de": "T-VL Kühlen",
+      "en": "T-Flow Cooling"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_flow_cool_adj": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 A1 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 A1"
+    },
+    "description": {
+      "de": "Nur wenn Parameter [Interlinkfunktion] = Ein. Kühlvorlauf-Solltemperatur wird bei geschlossenem RT-Schaltkontakt Kühlen um den eingestellten Wert reduziert",
+      "en": "Only when parameter [Interlink fct] = On. With a closed cooling RT switching contact, the cooling inflow target temperature is reduced by the set value"
+    },
+    "divisor": 10,
+    "id": "t_flow_cool_adj",
+    "name": {
+      "de": "Anpassung T-VL Kühlen",
+      "en": "T-Flow Cooling adj"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_flow_cool_max": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 13 5E 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 13 5E"
+    },
+    "description": {
+      "de": "Einstellung der minimalen Kühlvorlauf-Solltemperatur. Diese wird ab der Außentemperatur",
+      "en": "Setting the minimum cooling inflow target temperature. This is kept constant relative to the outside temperature"
+    },
+    "divisor": 10,
+    "id": "t_flow_cool_max",
+    "name": {
+      "de": "VL-Soll Max Kühlen",
+      "en": "T-Flow Cooling max"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_flow_cool_start": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 13 5D 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 13 5D"
+    },
+    "description": {
+      "de": "Einstellung der Kühlvorlauf-Solltemperatur beim Start des Kühlbetriebs",
+      "en": "Setting the cooling inflow target temperature at the start of cooling mode"
+    },
+    "divisor": 10,
+    "id": "t_flow_cool_start",
+    "name": {
+      "de": "VL-Soll Start Kühlen",
+      "en": "T-Flow Cooling start"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_flow_cooling": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 03 DD 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 03 DD"
+    },
+    "description": {
+      "de": "T-Flow Kühlung",
+      "en": "Setting the cooling inflow target temperature (fixed value) when cooling mode is active"
+    },
+    "divisor": 10,
+    "id": "t_flow_cooling",
+    "name": {
+      "de": "T-Flow Kühlung",
+      "en": "T-Flow Cooling"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_flow_day": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 29 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 29"
+    },
+    "description": {
+      "de": "Einstellung der Vorlauf-Solltemperatur für den Heizkreis während der Heizzeit bei Betriebsart: 'Automatik 1', 'Automatik 2', 'Heizen'",
+      "en": "Setting the inflow target temperature for the heating circuit during the heating time when in operating mode: 'Automatic 1', 'Automatic 2', 'Heating'"
+    },
+    "divisor": 10,
+    "id": "t_flow_day",
+    "name": {
+      "de": "T-Vorlauf Tag",
+      "en": "T-Flow Day"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_flow_night": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 2A 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 2A"
+    },
+    "description": {
+      "de": "Einstellung der Vorlauf-Solltemperatur für den Heizkreis während der Absenkzeit bei Betriebsart: 'Automatik 1', 'Automatik 2', 'Absenken'",
+      "en": "Setting the inflow target temperature for the heating circuit during the setback time when in operating mode: 'Automatic 1', 'Automatic 2', 'Reducing'"
+    },
+    "divisor": 10,
+    "id": "t_flow_night",
+    "name": {
+      "de": "T-Vorlauf Nacht",
+      "en": "T-Flow night"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_frost_protect": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0A 00 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0A 00"
+    },
+    "description": {
+      "de": "Aus: Kein Frostschutz des Heizkreises Sonst: Wenn die Außentemperatur unter den eingestellten Wert sinkt, schaltet die Anlage in den Frostschutzbetrieb (Einschalten der Pumpen). Die Funktion wird beendet,wenn die Außentemperatur über den eingestellten Wert +1 K steigt",
+      "en": "0=No frost protection of the heating circuit, Otherwise: If the outside temperature falls below the programmed value, the system switches into the frost protection mode (switches the pumps on). The function ceases once the outside temperature has risen to the set value +1 K"
+    },
+    "divisor": 1,
+    "id": "t_frost_protect",
+    "name": {
+      "de": "T-Frostschutz",
+      "en": "T-Frost Protect"
+    },
+    "type": "longint",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_hc": {
+    "request": {
+      "can_id": "610",
+      "command": "C1 00 0F 00 00 00 00"
+    },
+    "response": {
+      "can_id": "600",
+      "command": "C2 10 0F"
+    },
+    "description": {
+      "de": "Angezeigt wird die Vorlauftemperatur des direkten Heizkreises in C.",
+      "en": "The inflow temperature in the direct heating circuit is displayed in C."
+    },
+    "divisor": 10,
+    "id": "t_hc",
+    "name": {
+      "de": "T-HK",
+      "en": "T-HC"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_hc_set": {
+    "request": {
+      "can_id": "310",
+      "command": "61 00 04 00 00 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "62 10 04"
+    },
+    "description": {
+      "de": "Angezeigt wird die Vorlauf-Solltemperatur des direkten Heizkreises in C.",
+      "en": "The set temperature of the flow in the direct heating circuit is displayed in C."
+    },
+    "divisor": 10,
+    "id": "t_hc_set",
+    "name": {
+      "de": "T-HK Soll",
+      "en": "T-HC Setpoint"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_hs": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 01 D6 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 01 D6"
+    },
+    "description": {
+      "de": "Angezeigt wird die aktuelle Vorlauftemperatur (TVBH) des Wärmeerzeugers in C.",
+      "en": "The current temperature (TVBH) of the heat generator is displayed in C."
+    },
+    "divisor": 10,
+    "id": "t_hs",
+    "name": {
+      "de": "T-WE",
+      "en": "T-HS"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_hs_set": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 02 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 02"
+    },
+    "description": {
+      "de": "Angezeigt wird die aktuelle Vorlauf-Solltemperatur des Wärmeerzeugers in C",
+      "en": "The current Inflow target temperature of the heat generator is displayed in C"
+    },
+    "divisor": 10,
+    "id": "t_hs_set",
+    "name": {
+      "de": "T-WE Soll",
+      "en": "T-HS Setpoint"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_out_lim_day": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 16 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 16"
+    },
+    "description": {
+      "de": "Einstellung der automatischen Sommerabschaltung des Heizbetriebs",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "t_out_lim_day",
+    "name": {
+      "de": "Heizgrenze Tag",
+      "en": "T-Outside lim day"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_out_lim_night": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 01 17 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 01 17"
+    },
+    "description": {
+      "de": "Einstellung der Heizgrenze zur 'Abschaltung' des Heizkreises während der Absenkzeit",
+      "en": "Parameter for setting the heating limit for 'Switch-off' of the heating circuit during economy mode"
+    },
+    "divisor": 10,
+    "id": "t_out_lim_night",
+    "name": {
+      "de": "Heizgrenze Nacht",
+      "en": "T-Outside lim night"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_outdoor_ot1": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 FF 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 FF"
+    },
+    "description": {
+      "de": "Aktuelle Aussentemperatur (gemessen von optionalem Temperaturfühler RoCon OT1)",
+      "en": "Actual outdoor temperature (measured by optional temperature sensor RoCon OT1)"
+    },
+    "divisor": 10,
+    "id": "t_outdoor_ot1",
+    "name": {
+      "de": "TA",
+      "en": "TA"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_r1": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 00"
+    },
+    "description": {
+      "de": "Aktuelle Temperatur Heizung Rücklauf (tR1)",
+      "en": "Current heating return flow temperature (tR1)"
+    },
+    "divisor": 10,
+    "id": "t_r1",
+    "name": {
+      "de": "TR",
+      "en": "TR"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_reduced": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 08 00 00 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 08"
+    },
+    "description": {
+      "de": "Raum-Solltemperatur für die Absenkzeiten der permanenten Zeitprogramme [Automatik 1] und [Automatik 2] gilt",
+      "en": "Target room temperature for the setback times for the permanent timer programmes [Automatic 1] and [Automatic 2]"
+    },
+    "divisor": 10,
+    "id": "t_reduced",
+    "name": {
+      "de": "T-Absenkung",
+      "en": "T-Reduced"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_return": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 16 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 16"
+    },
+    "description": {
+      "de": "Angezeigt wird die aktuelle Rücklauftemperatur des Wärmeerzeugers in C. Ist kein entsprechender Sensor am Wärmeerzeuger angeschlossen, wird --- angezeigt.",
+      "en": "The current return flow temperature of the heat generator is displayed in C. If there is no relevant sensor connected to the heat generator, --- is displayed."
+    },
+    "divisor": 10,
+    "id": "t_return",
+    "name": {
+      "de": "T-Rücklauf",
+      "en": "T-Return"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_room": {
+    "request": {
+      "can_id": "190",
+      "command": "81 00 FA 00 11 00 00"
+    },
+    "description": {
+      "de": "Raumtemperatur, die von einer optionalen Rocon U1 Raumstation gemessen wird",
+      "en": "Room temperature measured by an optional Rocon U1 room station"
+    },
+    "divisor": 10,
+    "id": "t_room",
+    "name": {
+      "de": "T-Raum",
+      "en": "T-Room"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_room1_setpoint": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 05 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 05"
+    },
+    "description": {
+      "de": "Setpoint 1 value",
+      "en": "Setpoint 1 value"
+    },
+    "divisor": 10,
+    "id": "t_room1_setpoint",
+    "name": {
+      "de": "T Room 1 Setpoint",
+      "en": "T Room 1 Setpoint"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_room2_setpoint": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 06 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 06"
+    },
+    "description": {
+      "de": "Setpoint 2 value",
+      "en": "Setpoint 1 value"
+    },
+    "divisor": 10,
+    "id": "t_room2_setpoint",
+    "name": {
+      "de": "T Room 2 Setpoint",
+      "en": "T Room 2 Setpoint"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_room3_setpoint": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 07 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 07"
+    },
+    "description": {
+      "de": "Setpoint 3 value",
+      "en": "Setpoint 1 value"
+    },
+    "divisor": 10,
+    "id": "t_room3_setpoint",
+    "name": {
+      "de": "T Room 3 Setpoint",
+      "en": "T Room 3 Setpoint"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day1": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B B9 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B B9"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day1",
+    "name": {
+      "de": "Estrichprogramm 1",
+      "en": "Temp screed day 1"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day10": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C2 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C2"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day10",
+    "name": {
+      "de": "Estrichprogramm 10",
+      "en": "Temp screed day 10"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day11": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C3 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C3"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day11",
+    "name": {
+      "de": "Estrichprogramm 11",
+      "en": "Temp screed day 11"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day12": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C4 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C4"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day12",
+    "name": {
+      "de": "Estrichprogramm 12",
+      "en": "Temp screed day 12"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day13": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C5 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C5"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day13",
+    "name": {
+      "de": "Estrichprogramm 13",
+      "en": "Temp screed day 13"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day14": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C6 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C6"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day14",
+    "name": {
+      "de": "Estrichprogramm 14",
+      "en": "Temp screed day 14"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day15": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C7 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C7"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day15",
+    "name": {
+      "de": "Estrichprogramm 15",
+      "en": "Temp screed day 15"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day16": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C8 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C8"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day16",
+    "name": {
+      "de": "Estrichprogramm 16",
+      "en": "Temp screed day 16"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day17": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C9 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C9"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day17",
+    "name": {
+      "de": "Estrichprogramm 17",
+      "en": "Temp screed day 17"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day18": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B CA 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B CA"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day18",
+    "name": {
+      "de": "Estrichprogramm 18",
+      "en": "Temp screed day 18"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day19": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B CB 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B CB"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day19",
+    "name": {
+      "de": "Estrichprogramm 19",
+      "en": "Temp screed day 19"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day2": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B BA 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B BA"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day2",
+    "name": {
+      "de": "Estrichprogramm 2",
+      "en": "Temp screed day 2"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day20": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B CC 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B CC"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day20",
+    "name": {
+      "de": "Estrichprogramm 20",
+      "en": "Temp screed day 20"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day21": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B CD 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B CD"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day21",
+    "name": {
+      "de": "Estrichprogramm 21",
+      "en": "Temp screed day 21"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day22": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B CD 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B CD"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day22",
+    "name": {
+      "de": "Estrichprogramm 22",
+      "en": "Temp screed day 22"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day23": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B CF 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B CF"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day23",
+    "name": {
+      "de": "Estrichprogramm 23",
+      "en": "Temp screed day 23"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day24": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B D0 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B D0"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day24",
+    "name": {
+      "de": "Estrichprogramm 24",
+      "en": "Temp screed day 24"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day25": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B D1 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B D1"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day25",
+    "name": {
+      "de": "Estrichprogramm 25",
+      "en": "Temp screed day 25"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day26": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B D2 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B D2"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day26",
+    "name": {
+      "de": "Estrichprogramm 26",
+      "en": "Temp screed day 26"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day27": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B D3 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B D3"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day27",
+    "name": {
+      "de": "Estrichprogramm 27",
+      "en": "Temp screed day 27"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day28": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B D4 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B D4"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day28",
+    "name": {
+      "de": "Estrichprogramm 28",
+      "en": "Temp screed day 28"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day3": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B BB 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B BB"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day3",
+    "name": {
+      "de": "Estrichprogramm 3",
+      "en": "Temp screed day 3"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day4": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B BC 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B BC"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day4",
+    "name": {
+      "de": "Estrichprogramm 4",
+      "en": "Temp screed day 4"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day5": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B BD 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B BD"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day5",
+    "name": {
+      "de": "Estrichprogramm 5",
+      "en": "Temp screed day 5"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day6": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B BE 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B BE"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day6",
+    "name": {
+      "de": "Estrichprogramm 6",
+      "en": "Temp screed day 6"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day7": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B BD 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B BD"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day7",
+    "name": {
+      "de": "Estrichprogramm 7",
+      "en": "Temp screed day 7"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day8": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C0 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C0"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day8",
+    "name": {
+      "de": "Estrichprogramm 8",
+      "en": "Temp screed day 8"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_screed_day9": {
+    "request": {
+      "can_id": "190",
+      "command": "61 00 FA 0B C1 00 00"
+    },
+    "response": {
+      "can_id": "300",
+      "command": "32 10 FA 0B C1"
+    },
+    "description": {
+      "de": "Einstellung des Ablaufprogramms der Estrichaufheizung. Für eine Dauer von maximal 28 Tagen kann separat für jeden Tag eine eigene Vorlauf-Solltemperatur eingestellt werden. Das Ende des Estrichprogramms wird durch den 1. Tag mit der Sollwerteinstellung '- - - -' definiert",
+      "en": "Setting the procedural program for screed heating. An individual inflow temperature can be set for each day for a maximum period of 28 days. The end of the screed programme is defined by the 1st. Day at target value setting"
+    },
+    "divisor": 10,
+    "id": "screed_day9",
+    "name": {
+      "de": "Estrichprogramm 9",
+      "en": "Temp screed day 9"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "t_v1": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 FC 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 FC"
+    },
+    "description": {
+      "de": "Aktuelle Vorlauftemperatur nach dem Plattenwärmetauscher (tV1)",
+      "en": "Current inflow temperature after the plate heat exchanger (tV1)"
+    },
+    "divisor": 10,
+    "id": "t_v1",
+    "name": {
+      "de": "TV",
+      "en": "TV"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_vbh": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C0 FE 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C0 FE"
+    },
+    "description": {
+      "de": "Aktuelle Temperatur Heizung Vorlauf ggf. nach Heizungsunterstützungswärmetauscher (tV,BH)",
+      "en": "Current heating inflow temperature or temp. after heating support heat exchanger (tV,BH)"
+    },
+    "divisor": 10,
+    "id": "t_vbh",
+    "name": {
+      "de": "TVBH",
+      "en": "TVBH"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "t_vbh1_max": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 6E 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 6E"
+    },
+    "description": {
+      "de": "Einstellung begrenzt die Vorlauf-Solltemperatur (gemessen an tV, BH) bei aktiver Heizungsunterstützungsfunktion",
+      "en": "Setting limits the inflow temperature (measured at tV, BH) with active heating support function"
+    },
+    "divisor": 10,
+    "id": "t_vbh1_max",
+    "name": {
+      "de": "Max Temp Heizung",
+      "en": "T vbh1 max"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": true
+  },
+  "ta2": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 05 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 05"
+    },
+    "description": {
+      "de": "Aktuelle Aussentemperatur (gemessen von Temperaturfühler des Wärmepumpenaussengeräts)",
+      "en": "Actual outdoor temperature (measured by temperature sensor of the external heat pump)"
+    },
+    "divisor": 10,
+    "id": "ta2",
+    "name": {
+      "de": "TA2 [C]",
+      "en": "TA2 [C]"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "tdhw2": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 06 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 06"
+    },
+    "description": {
+      "de": "Current temperature in domestic hot water storage tank, secondary sensor (tDHW2).",
+      "en": "Current temperature in domestic hot water storage tank, secondary sensor (tDHW2)."
+    },
+    "divisor": 10,
+    "id": "tdhw2",
+    "name": {
+      "de": "Tdhw2 [C]",
+      "en": "Tdhw2 [C]"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "tdiff_dhw_ch": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 6D 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 6D"
+    },
+    "description": {
+      "de": "TDiff-WW HZU",
+      "en": "TDiff-DHW CH"
+    },
+    "divisor": 10,
+    "id": "tdiff_dhw_ch",
+    "name": {
+      "de": "TDiff-WW HZU",
+      "en": "TDiff-DHW CH"
+    },
+    "type": "longint",
+    "writable": true
+  },
+  "timer_boh": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 92 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 92"
+    },
+    "description": {
+      "de": "Verzögerungszeit, ab wann der zusätzliche Wärmeerzeuger die Wärmepumpe bei einer Warmwasserladung unterstützen darf",
+      "en": "Delay time after which the reserve heating may support the heat pump in hot water charging"
+    },
+    "divisor": 1,
+    "id": "timer_boh",
+    "name": {
+      "de": "Wartezeit BOH",
+      "en": "Timer BOH"
+    },
+    "type": "longint",
+    "unit": "min",
+    "writable": true
+  },
+  "tliq2": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 03 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 03"
+    },
+    "description": {
+      "de": "Aktuelle Kältemitteltemperatur (tliq2).",
+      "en": "Current coolant temperature (tliq2)."
+    },
+    "divisor": 10,
+    "id": "tliq2",
+    "name": {
+      "de": "Tliq2 [C]",
+      "en": "Tliq2 [C]"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "tr2": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 04 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 04"
+    },
+    "description": {
+      "de": "Aktuelle Temperatur Heizung Rücklauf, sekundärer Fühler (tR2).",
+      "en": "Current heating return flow temperature, secondary sensor (tR2)."
+    },
+    "divisor": 10,
+    "id": "tr2",
+    "name": {
+      "de": "TR2 [C]",
+      "en": "TR2 [C]"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "tvbh2": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 02 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 02"
+    },
+    "description": {
+      "de": "Aktuelle Temperatur Heizung Vorlauf ggf. nach Heizungsunterstützungswärmetauscher (tV,BH).",
+      "en": "Current heating inflow temperature or temp. after heating support heat exchanger (tV,BH)."
+    },
+    "divisor": 10,
+    "id": "tvbh2",
+    "name": {
+      "de": "TVBH2 [C]",
+      "en": "TVBH2 [C]"
+    },
+    "type": "float",
+    "unit": "deg",
+    "writable": false
+  },
+  "v1": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA C1 01 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA C1 01"
+    },
+    "description": {
+      "de": "Aktueller Volumenstrom (Durchfluss) in der Heizungsanlage",
+      "en": "Actual volume flow (flow rate) in the heating system"
+    },
+    "divisor": 1,
+    "id": "v1",
+    "name": {
+      "de": "V",
+      "en": "V"
+    },
+    "type": "longint",
+    "unit": "lh",
+    "writable": false
+  },
+  "v_var": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 FA 06 9C 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 FA 06 9C"
+    },
+    "description": {
+      "de": "Aktuell benötigter Mindest-Volumenstrom der Anlage",
+      "en": "Current minimum necessary volume flow in the system (calculated value, not configurable)"
+    },
+    "divisor": 10,
+    "id": "v_var",
+    "name": {
+      "de": "DurchflussBer",
+      "en": "V var"
+    },
+    "type": "longint",
+    "unit": "lh",
+    "writable": false
+  },
+  "water_pressure": {
+    "request": {
+      "can_id": "190",
+      "command": "31 00 1C 00 00 00 00"
+    },
+    "response": {
+      "can_id": "180",
+      "command": "32 10 1C"
+    },
+    "description": {
+      "de": "Angezeigt wird der aktuelle Wasserdruck in bar.",
+      "en": "The current water pressure is displayed in bar."
+    },
+    "divisor": 1000,
+    "id": "water_pressure",
+    "name": {
+      "de": "Wasserdruck",
+      "en": "Water Pressure"
+    },
+    "type": "float",
+    "unit": "bar",
+    "writable": false
+  }
+}

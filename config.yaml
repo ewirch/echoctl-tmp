@@ -1,0 +1,72 @@
+can:
+  iface: vcan0
+
+mqtt:
+  server: tcp://homeassistant.local:1883
+  client-id: mqtt-test-1
+  value-topic-prefix: dbg
+
+subscriptions:
+  - command: t_hs
+    delay: 5s
+  - command: t_hs_set
+    delay: 5s
+  - command: t_v1
+    delay: 5s
+  - command: t_ext
+    delay: 5s
+  - command: t_dhw
+    delay: 5s
+  - command: t_dhw_set
+    delay: 5s
+  - command: t_return
+    delay: 5s
+  - command: t_hc_set
+    delay: 5s
+  - command: t_vbh
+    delay: 5s
+  - command: t_r1
+    delay: 5s
+  - command: t_room1_setpoint
+    delay: 5s
+  - command: t_dhw_setpoint1
+    delay: 5s
+  - command: tdiff_dhw_ch
+    delay: 5s
+  - command: delta_t_ch
+    delay: 5s
+  - command: max_t_flow
+    delay: 5s
+  - command: min_t_flow
+    delay: 5s
+  - command: hyst_hp
+    delay: 5s
+  - command: water_pressure
+    delay: 5s
+  - command: flow_rate
+    delay: 5s
+  - command: v1
+    delay: 5s
+  - command: status_pump
+    delay: 5s
+  - command: mode
+    delay: 5s
+  - command: pump
+    delay: 5s
+  - command: posmix
+    delay: 5s
+  - command: bpv
+    delay: 5s
+  - command: qwp
+    delay: 5s
+  - command: qch
+    delay: 5s
+  - command: qdhw
+    delay: 5s
+
+
+
+lang: de
+
+homeassistant:
+  discovery-topic-prefix: dbg-homeassistant
