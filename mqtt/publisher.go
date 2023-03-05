@@ -87,7 +87,7 @@ func (p *publisher) publishCmdValue(cmd dispatcher.CommandValue, value string) m
 		zap.String("topic", topic),
 		zap.String("value", value),
 		zap.String("id", cmd.Cmd.Id),
-		zap.Uint16("orig_value", cmd.Value),
+		zap.Int16("orig_value", cmd.Value),
 		zap.Float32("divisor", cmd.Cmd.Divisor),
 		zap.Stringer("unit", cmd.Cmd.Type),
 	)
@@ -125,11 +125,11 @@ func assertNonZeroDivisor(commandValue dispatcher.CommandValue) {
 	}
 }
 
-func applyDivisor(value uint16, divisor float32) float32 {
+func applyDivisor(value int16, divisor float32) float32 {
 	return float32(value) / divisor
 }
 
-func getLabel(code uint16, labelMap map[string]int) (string, error) {
+func getLabel(code int16, labelMap map[string]int) (string, error) {
 	for label, labelCode := range labelMap {
 		if int(code) == labelCode {
 			return label, nil

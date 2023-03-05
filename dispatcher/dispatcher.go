@@ -12,7 +12,7 @@ import (
 
 type CommandValue struct {
 	Cmd   conf.Command
-	Value uint16
+	Value int16
 }
 
 type dispatcher struct {
@@ -78,16 +78,16 @@ func (d *dispatcher) publishToRequester(cmd conf.Command) {
 	}
 }
 
-func (d *dispatcher) publishToMqttPublisher(cmd conf.Command, value uint16) {
+func (d *dispatcher) publishToMqttPublisher(cmd conf.Command, value int16) {
 	select {
 	case d.toMqttPublisher <- CommandValue{cmd, value}:
 	case <-d.tomb.Dying():
 	}
 }
 
-func extractValue(cmd conf.Command, data []byte) uint16 {
+func extractValue(cmd conf.Command, data []byte) int16 {
 	lenCommandBytes := len(cmd.Response.CommandBytes)
-	return binary.BigEndian.Uint16(data[lenCommandBytes:])
+	return int16(binary.BigEndian.Uint16(data[lenCommandBytes:]))
 }
 
 // findCmd searches for a command matching frame in dispatcher.commands.

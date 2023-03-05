@@ -45,12 +45,18 @@ func TestNewPublisher(t *testing.T) {
 		toPublisher, mqttClient, publisher := NewPublisher("")
 
 		startAndRun(t, publisher, func() {
-			toPublisher <- NewValueCommand("mode", 2, map[string]int{"off": 0, "on": 1, "overpower": 2})
+			toPublisher <- NewValueCommand("mode", 4, map[string]int{
+				"cooling":   2,
+				"defrost":   3,
+				"heating":   1,
+				"standby":   0,
+				"hot water": 4,
+			})
 			select {
 			case <-time.After(time.Second):
 				t.Errorf("Expected frame was not published in 1s")
 			case frame := <-mqttClient.GetPublished():
-				assert.Equal(t, "overpower", frame.payload, "Payload should be the same")
+				assert.Equal(t, "hot water", frame.payload, "Payload should be the same")
 			}
 		})
 	})

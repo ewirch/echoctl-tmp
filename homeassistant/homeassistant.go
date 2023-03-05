@@ -12,155 +12,144 @@ import (
 func AsEntityJson(subscription *can.Subscription, lang string, log *zap.Logger) ([]byte, error) {
 	id := subscription.Command.Id
 	unit := subscription.Command.Unit
+	valueCodes := subscription.Command.ValueCode
 	e := entity{
 		Device:                    daikinAltherma(),
-		ObjectId:                  id,
-		UniqueId:                  "daikin/" + id,
+		ObjectId:                  strPtr(id),
+		UniqueId:                  strPtr("daikin/" + id),
 		Name:                      localize(id, subscription.Command.Name, lang, log),
-		StateTopic:                "daikin/" + id,
+		StateTopic:                strPtr("daikin/" + id),
 		UnitOfMeasurement:         mapUnit(unit),
 		Icon:                      mapIcon(unit),
-		DeviceClass:               mapDeviceClass(unit),
+		DeviceClass:               mapDeviceClass(unit, valueCodes),
 		StateClass:                mapStateClass(unit),
-		ExpiresAfter:              expiresAfter(subscription),
+		ExpiresAfter:              int64Ptr(expiresAfter(subscription)),
 		SuggestedDisplayPrecision: suggestedDisplayPrecision(unit),
 	}
 	return json.Marshal(e)
 }
 
-func suggestedDisplayPrecision(unit conf.Unit) int {
+func suggestedDisplayPrecision(unit conf.Unit) *int {
 	if !unit.IsAUnit() {
 		panic(fmt.Sprintf("%v is not a conf.Unit", unit))
 	}
 	switch unit {
 	case conf.UnitDeg, conf.UnitBar, conf.UnitWh, conf.UnitW:
-		return 2
+		return intPtr(2)
 	case conf.UnitKw, conf.UnitKwh:
-		return 3
+		return intPtr(3)
 	case conf.UnitLh:
-		return 1
-	case conf.UnitPercent, conf.UnitNone, conf.UnitSec, conf.UnitMin, conf.UnitHour:
-		return 0
+		return intPtr(1)
+	case conf.UnitPercent, conf.UnitSec, conf.UnitMin, conf.UnitHour:
+		return intPtr(0)
+	case conf.UnitNone:
+		return nil
 	default:
-		return 0
+		return nil
 	}
 }
 
-func mapDeviceClass(unit conf.Unit) string {
+func mapDeviceClass(unit conf.Unit, valueCodes map[string]int) *string {
 	if !unit.IsAUnit() {
 		panic(fmt.Sprintf("%v is not a conf.Unit", unit))
 	}
 	switch unit {
 	case conf.UnitDeg:
-		return "temperature"
+		return strPtr("temperature")
 	case conf.UnitBar:
-		return "pressure"
+		return strPtr("pressure")
 	case conf.UnitWh, conf.UnitKwh:
-		return "energy"
+		return strPtr("energy")
 	case conf.UnitW, conf.UnitKw:
-		return "power"
+		return strPtr("power")
 	case conf.UnitNone:
-		return ""
-	case conf.UnitLh:
-		return ""
-	case conf.UnitPercent:
-		return ""
-	case conf.UnitSec:
-		return ""
-	case conf.UnitMin:
-		return ""
-	case conf.UnitHour:
-		return ""
+		if len(valueCodes) > 0 {
+			return strPtr("enum")
+		} else {
+			return nil
+		}
+	case conf.UnitLh, conf.UnitPercent, conf.UnitSec, conf.UnitMin, conf.UnitHour:
+		return nil
 	default:
-		return ""
+		return nil
 	}
 }
 
-func mapStateClass(unit conf.Unit) string {
+func mapStateClass(unit conf.Unit) *string {
 	if !unit.IsAUnit() {
 		panic(fmt.Sprintf("%v is not a conf.Unit", unit))
 	}
 	switch unit {
 	case conf.UnitDeg, conf.UnitBar, conf.UnitW, conf.UnitKw, conf.UnitLh, conf.UnitPercent, conf.UnitSec, conf.UnitMin, conf.UnitHour:
-		return "measurement"
+		return strPtr("measurement")
 	case conf.UnitWh, conf.UnitKwh:
-		return "total_increasing"
+		return strPtr("total_increasing")
 	case conf.UnitNone:
-		return ""
+		return nil
 	default:
-		return ""
+		return nil
 	}
 }
 
-func mapUnit(unit conf.Unit) string {
+func mapUnit(unit conf.Unit) *string {
 	if !unit.IsAUnit() {
 		panic(fmt.Sprintf("%v is not a conf.Unit", unit))
 	}
 	switch unit {
 	case conf.UnitDeg:
-		return "°C"
+		return strPtr("°C")
 	case conf.UnitBar:
-		return "bar"
+		return strPtr("bar")
 	case conf.UnitLh:
-		return "L/h"
+		return strPtr("L/h")
 	case conf.UnitPercent:
-		return "%"
+		return strPtr("%")
 	case conf.UnitWh:
-		return "Wh"
+		return strPtr("Wh")
 	case conf.UnitKwh:
-		return "kWh"
+		return strPtr("kWh")
 	case conf.UnitW:
-		return "W"
+		return strPtr("W")
 	case conf.UnitKw:
-		return "kW"
+		return strPtr("kW")
 	case conf.UnitSec:
-		return "s"
+		return strPtr("s")
 	case conf.UnitMin:
-		return "min"
+		return strPtr("min")
 	case conf.UnitHour:
-		return "h"
+		return strPtr("h")
 	case conf.UnitNone:
-		return ""
+		return nil
 	default:
-		return ""
+		return nil
 	}
 }
 
-func mapIcon(unit conf.Unit) string {
+func mapIcon(unit conf.Unit) *string {
 	if !unit.IsAUnit() {
 		panic(fmt.Sprintf("%v is not a conf.Unit", unit))
 	}
 	switch unit {
 	case conf.UnitDeg:
-		return "mdi:thermometer"
+		return strPtr("mdi:thermometer")
 	case conf.UnitBar:
-		return "mdi:car-brake-low-pressure"
+		return strPtr("mdi:car-brake-low-pressure")
 	case conf.UnitWh, conf.UnitKwh, conf.UnitKw, conf.UnitW:
-		return "mdi:lightning-bolt"
-	case conf.UnitLh:
-		return ""
-	case conf.UnitPercent:
-		return ""
-	case conf.UnitSec:
-		return ""
-	case conf.UnitMin:
-		return ""
-	case conf.UnitHour:
-		return ""
-	case conf.UnitNone:
-		return ""
+		return strPtr("mdi:lightning-bolt")
+	case conf.UnitLh, conf.UnitPercent, conf.UnitSec, conf.UnitMin, conf.UnitHour, conf.UnitNone:
+		return nil
 	default:
-		return ""
+		return nil
 	}
 }
 
-func localize(id string, dict map[string]string, lang string, log *zap.Logger) string {
+func localize(id string, dict map[string]string, lang string, log *zap.Logger) *string {
 	text, ok := dict[lang]
 	if !ok {
 		log.Error("dict is missing translation", zap.String("id", id), zap.String("lang", lang))
 		text = maps.Values(dict)[0]
 	}
-	return text
+	return &text
 }
 
 // expiresAfter returns the duration in seconds after the last update, after which the sensor can be considered as unavailable.
@@ -168,3 +157,9 @@ func expiresAfter(subscription *can.Subscription) int64 {
 	// We allow twice the update duration. If the sensor was not updated at that time, probably something is wrong, and the sensor should be considered unavailable.
 	return int64(subscription.Delay.Seconds() * 2)
 }
+
+func int64Ptr(v int64) *int64 { return &v }
+
+func intPtr(v int) *int { return &v }
+
+func strPtr(v string) *string { return &v }

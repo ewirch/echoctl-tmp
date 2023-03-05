@@ -121,7 +121,30 @@ func TestFunction(t *testing.T) {
 			inbound <- canbus.Frame{ID: 123, Data: []byte{3, 7, 5, 4, 3}}
 			select {
 			case commValue := <-toMqttPublisher:
-				assert.Equal(t, uint16(3*256+4), commValue.Value, "ID is different. Wrong match?")
+				assert.Equal(t, int16(3*256+4), commValue.Value, "ID is different. Wrong match?")
+			case <-time.After(time.Second):
+				t.Log("Timeout waiting for data from toRequestor.")
+			}
+		})
+	})
+
+	t.Run("Interpets inbound value as int16", func(t *testing.T) {
+		t.Parallel()
+		d, inbound, _, toMqttPublisher := NewDispatcher([]conf.Command{
+			{
+				Id: "001",
+				Response: conf.RequestCommand{
+					CanId:        123,
+					CommandBytes: []byte{1, 1, 1},
+				},
+			},
+		})
+
+		startAndRun(t, d, func() {
+			inbound <- canbus.Frame{ID: 123, Data: []byte{1, 1, 1, 0xff, 0xff}}
+			select {
+			case commValue := <-toMqttPublisher:
+				assert.Equal(t, int16(-1), commValue.Value, "ID is different. Wrong match?")
 			case <-time.After(time.Second):
 				t.Log("Timeout waiting for data from toRequestor.")
 			}

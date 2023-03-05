@@ -24,10 +24,10 @@ candump -tz vcan0
 cansend vcan0 123#00FFAA5501020304
 cansend vcan0 '180#3210FAC0F60100'
 cansend vcan0 '180#3210FA01800100'
-cansend vcan0 '180#3210FAC0F60300'
+cansend vcan0 '180#3210FAC0F60004'
 */
 
-const version = "1.2.1"
+const version = "1.2.3"
 const usage = `Altherma ECH₂O Control.
 
 Usage:
