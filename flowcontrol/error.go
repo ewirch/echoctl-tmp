@@ -17,3 +17,12 @@ func IsShouldLog(err error) bool {
 	shouldLog, ok := err.(ShouldLog)
 	return ok && shouldLog.ShouldLog()
 }
+
+type ShouldRetry interface {
+	ShouldRetry() bool
+}
+
+func IsShouldRetry(err error) bool {
+	shouldRetry, ok := err.(ShouldRetry)
+	return ok && shouldRetry.ShouldRetry()
+}

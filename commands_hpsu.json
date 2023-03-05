@@ -160,7 +160,7 @@
     "divisor": 1,
     "id": "bpv",
     "name": {
-      "de": "BPV",
+      "de": "Wärmeleistung des elektrischen Zuheizers, Stufe 1",
       "en": "BPV"
     },
     "type": "longint",
@@ -183,7 +183,7 @@
     "divisor": 0.1,
     "id": "buh_s1_pow",
     "name": {
-      "de": "Leistung EHS Stufe 1",
+      "de": "Wärmeleistung des elektrischen Zuheizers, Stufe 1",
       "en": "BUH s1 power"
     },
     "type": "longint",
@@ -206,7 +206,7 @@
     "divisor": 0.1,
     "id": "buh_s2_pow",
     "name": {
-      "de": "Leistung EHS Stufe 2",
+      "de": "Wärmeleistung des elektrischen Zuheizers, Stufe 2",
       "en": "BUH s2 power"
     },
     "type": "longint",
@@ -298,7 +298,7 @@
     "divisor": 10,
     "id": "delta_t_ch",
     "name": {
-      "de": "Spreizung Mod HZ",
+      "de": "Sollspreizung für Raumheizung",
       "en": "Delta-T CH"
     },
     "type": "float",
@@ -321,7 +321,7 @@
     "divisor": 1,
     "id": "dhw_off_time",
     "name": {
-      "de": "WW Sperrzeit",
+      "de": "Warmwasser Sperrzeit",
       "en": "DHW Off Time"
     },
     "type": "float",
@@ -343,7 +343,7 @@
     "divisor": 1,
     "id": "ehs",
     "name": {
-      "de": "EHS",
+      "de": "Aktuelle Leistung des Backup-Heaters",
       "en": "EHS"
     },
     "type": "longint",
@@ -478,7 +478,7 @@
     },
     "id": "func_heating",
     "name": {
-      "de": "Funktion EHS",
+      "de": "Funktion zusätzlicher Wärmeerzeuger ",
       "en": "Function Heating"
     },
     "type": "value",
@@ -524,7 +524,7 @@
     },
     "id": "hc_func",
     "name": {
-      "de": "HK Funktion",
+      "de": "Heizkreis Funktion",
       "en": "HC Function"
     },
     "type": "value",
@@ -624,7 +624,7 @@
     "divisor": 10,
     "id": "hyst_hp",
     "name": {
-      "de": "Hysterese WW",
+      "de": "Hysterese Warmwasser",
       "en": "Hyst HP"
     },
     "type": "float",
@@ -646,7 +646,7 @@
     },
     "id": "hzu",
     "name": {
-      "de": "HZ Unterstützung",
+      "de": "Heizungsunterstützung aus Warmwasserspeicher",
       "en": "HUZ"
     },
     "type": "value",
@@ -671,7 +671,7 @@
     },
     "id": "indoor_unit",
     "name": {
-      "de": "Innengerät",
+      "de": "Typ Wärmepumpeninnengerät",
       "en": "Indoor unit"
     },
     "type": "value",
@@ -753,7 +753,7 @@
     "divisor": 1,
     "id": "max_dhw_loading",
     "name": {
-      "de": "Max WW Ladezeit",
+      "de": "Max Warmwasser Ladezeit",
       "en": "Max DHW loading"
     },
     "type": "longint",
@@ -845,7 +845,7 @@
     "divisor": 10,
     "id": "max_t_flow",
     "name": {
-      "de": "Max T-Vorlauf",
+      "de": "Max Temperatur Vorlauf",
       "en": "Max T-Flow"
     },
     "type": "float",
@@ -868,7 +868,7 @@
     "divisor": 10,
     "id": "max_tout_cool",
     "name": {
-      "de": "Max Kühlen A-Temp",
+      "de": "Max Kühlen Außen-Temp",
       "en": "Max T-Out Cooling"
     },
     "type": "float",
@@ -937,7 +937,7 @@
     "divisor": 10,
     "id": "min_t_flow",
     "name": {
-      "de": "Min T-Vorlauf",
+      "de": "Min Temperatur Vorlauf",
       "en": "Min T-Flow"
     },
     "type": "float",
@@ -960,7 +960,7 @@
     "divisor": 10,
     "id": "min_t_flow_cool",
     "name": {
-      "de": "Min VL-Soll Kühlen",
+      "de": "Min Vorlauf-Soll Kühlen",
       "en": "Min T-Flow Cooling"
     },
     "type": "float",
@@ -982,7 +982,7 @@
     },
     "id": "mode",
     "name": {
-      "de": "Modus",
+      "de": "Modus der Wärmepumpe",
       "en": "Mode"
     },
     "type": "value",
@@ -990,7 +990,8 @@
       "cooling": 2,
       "defrost": 3,
       "heating": 1,
-      "standby": 0
+      "standby": 0,
+      "hot water": 4
     },
     "writable": false
   },
@@ -1009,7 +1010,7 @@
     },
     "id": "mode_01",
     "name": {
-      "de": "Modus",
+      "de": "Modus der Wärmepumpe",
       "en": "Mode"
     },
     "type": "value",
@@ -1039,7 +1040,7 @@
     },
     "id": "modus_sg",
     "name": {
-      "de": "Modus SG",
+      "de": "Modus Smart Grid",
       "en": "Mode SG"
     },
     "type": "value",
@@ -1091,7 +1092,7 @@
     "divisor": 10,
     "id": "out_temp_adapt",
     "name": {
-      "de": "AF Anpassung",
+      "de": "Außentemperatur Anpassung",
       "en": "Outside Temp Adaptation"
     },
     "type": "float",
@@ -1113,7 +1114,7 @@
     },
     "id": "outdoor_type",
     "name": {
-      "de": "Aussengerät",
+      "de": "Typ Wärmepumpenaußengerät",
       "en": "Outdoor type"
     },
     "type": "value",
@@ -1143,7 +1144,7 @@
     },
     "id": "outside_conf",
     "name": {
-      "de": "Konfiguration T-Aussen",
+      "de": "Konfiguration Temperaturfühler Aussen",
       "en": "Outside Config"
     },
     "type": "value",
@@ -1192,7 +1193,7 @@
     "divisor": 0.1,
     "id": "power_biv",
     "name": {
-      "de": "Leistung BIV",
+      "de": "Max Leistung Heizungsunterstützung",
       "en": "Power BIV"
     },
     "type": "longint",
@@ -1215,7 +1216,7 @@
     "divisor": 0.1,
     "id": "power_dhw",
     "name": {
-      "de": "Leistung WW",
+      "de": "Leistung Warmwasseraufbereitung",
       "en": "Power DHW"
     },
     "type": "longint",
@@ -1263,7 +1264,7 @@
     "divisor": 1,
     "id": "pump",
     "name": {
-      "de": "Pump",
+      "de": "Leistung Heizungsumwälzpumpe",
       "en": "Pump"
     },
     "type": "longint",
@@ -1283,14 +1284,14 @@
       "de": "Angezeigt wird die Wärmemenge des zusätzlichen Wärmeerzeugers für die Warmwasserbereitung in Wh.",
       "en": "The amount of heat in the additional heat generator for hot water generation is displayed in Wh."
     },
-    "divisor": 0.1,
+    "divisor": 1,
     "id": "qboh",
     "name": {
-      "de": "EHS für DHW",
+      "de": "Energie zusätzlicher Wärmeerzeuger f. Warmwasser",
       "en": "Qboh"
     },
     "type": "longint",
-    "unit": "wh",
+    "unit": "kwh",
     "writable": false
   },
   "qch": {
@@ -1306,14 +1307,14 @@
       "de": "Angezeigt wird die Wärmemenge der Wärmepumpe für den Heizbetrieb in Wh.",
       "en": "The quantity of heat in the heat pump for heating is displayed in Wh."
     },
-    "divisor": 0.1,
+    "divisor": 1,
     "id": "qch",
     "name": {
       "de": "Energie Heizung",
       "en": "Qch"
     },
     "type": "longint",
-    "unit": "wh",
+    "unit": "kwh",
     "writable": false
   },
   "qchhp": {
@@ -1329,14 +1330,14 @@
       "de": "Angezeigt wird die Wärmemenge des zusätzlichen Wärmeerzeugers für den Heizbetrieb in Wh.",
       "en": "The amount of heat in the additional heat generator for heating mode is displayed in Wh."
     },
-    "divisor": 0.1,
+    "divisor": 1,
     "id": "qchhp",
     "name": {
-      "de": "EHS für CH",
+      "de": "Energie zusätzlicher Wärmeerzeuger f. Heizung",
       "en": "Qchhp"
     },
     "type": "longint",
-    "unit": "wh",
+    "unit": "kwh",
     "writable": false
   },
   "qdhw": {
@@ -1352,14 +1353,14 @@
       "de": "Angezeigt wird die Wärmemenge für die Warmwasserbereitung in Wh.",
       "en": "The quantity of heat for hot water generation is displayed in Wh."
     },
-    "divisor": 0.1,
+    "divisor": 1,
     "id": "qdhw",
     "name": {
-      "de": "Energie für WW",
+      "de": "Energie für Warmwasser",
       "en": "Qdhw"
     },
     "type": "longint",
-    "unit": "wh",
+    "unit": "kwh",
     "writable": false
   },
   "qsc": {
@@ -1375,14 +1376,14 @@
       "de": "Angezeigt wird die Wärmemenge der Wärmepumpe für den Kühlbetrieb in Wh.",
       "en": "The quantity of heat in the heat pump for cooling is displayed in Wh."
     },
-    "divisor": 0.1,
+    "divisor": 1,
     "id": "qsc",
     "name": {
       "de": "Energie Kühlung",
       "en": "Qsc"
     },
     "type": "longint",
-    "unit": "wh",
+    "unit": "kwh",
     "writable": false
   },
   "quiet": {
@@ -1395,12 +1396,12 @@
       "command": "32 10 FA C1 07"
     },
     "description": {
-      "de": "Shows the status of the whisper mode.",
+      "de": "Flüstermodus Status.",
       "en": "Shows the status of the whisper mode."
     },
     "id": "quiet",
     "name": {
-      "de": "quiet",
+      "de": "Flüsterbetrieb",
       "en": "quiet"
     },
     "type": "value",
@@ -1450,14 +1451,14 @@
       "de": "Angezeigt wird die gesamte Wärmemenge der Wärmepumpe in Wh.",
       "en": "The total amount of heat in the heat pump is displayed in Wh."
     },
-    "divisor": 0.1,
+    "divisor": 1,
     "id": "qwp",
     "name": {
       "de": "Energie erzeugt",
       "en": "QWP"
     },
     "type": "longint",
-    "unit": "wh",
+    "unit": "kwh",
     "writable": false
   },
   "room_therm": {
@@ -1475,7 +1476,7 @@
     },
     "id": "room_therm",
     "name": {
-      "de": "Raumthermostat",
+      "de": "Raumthermostat Modus",
       "en": "Room thermostat"
     },
     "type": "value",
@@ -1500,7 +1501,7 @@
     },
     "id": "rt",
     "name": {
-      "de": "RT",
+      "de": "Raumthermostat",
       "en": "RT"
     },
     "type": "value",
@@ -1567,7 +1568,7 @@
     },
     "id": "screed",
     "name": {
-      "de": "Estrich",
+      "de": "Estrichtrocknung",
       "en": "Screed"
     },
     "type": "value",
@@ -1615,7 +1616,7 @@
     },
     "id": "smart_grid",
     "name": {
-      "de": "SMART GRID",
+      "de": "Smart Grid",
       "en": "SMART GRID"
     },
     "type": "value",
@@ -1641,7 +1642,7 @@
     "divisor": 10,
     "id": "start_tout_cool",
     "name": {
-      "de": "Start Kühlen A-Temp",
+      "de": "Start Kühlen Außentemp",
       "en": "Start T-Out Cooling"
     },
     "type": "float",
@@ -1688,7 +1689,7 @@
     },
     "id": "storage_conf",
     "name": {
-      "de": "Konfiguration T-WW",
+      "de": "Konfiguration Warmwasser-Temperatur",
       "en": "Storage Config"
     },
     "type": "value",
@@ -1715,8 +1716,8 @@
     "divisor": 1,
     "id": "sw_vers_01",
     "name": {
-      "de": "Version SW 1",
-      "en": "Version SW 1"
+      "de": "Software Version 1",
+      "en": "Software Version 1"
     },
     "type": "longint",
     "writable": false
@@ -1737,8 +1738,8 @@
     "divisor": 1,
     "id": "sw_vers_02",
     "name": {
-      "de": "Version SW 2",
-      "en": "Version SW 2"
+      "de": "Software Version 2",
+      "en": "Software Version 2"
     },
     "type": "longint",
     "writable": false
@@ -1759,8 +1760,8 @@
     "divisor": 1,
     "id": "sw_vers_03",
     "name": {
-      "de": "Version SW 3",
-      "en": "Version SW 3"
+      "de": "Software Version 3",
+      "en": "Software Version 3"
     },
     "type": "longint",
     "writable": false
@@ -1781,7 +1782,7 @@
     "divisor": 10,
     "id": "t_absence",
     "name": {
-      "de": "T-Abwesend",
+      "de": "Raum-Solltemperatur, Absenkzeit",
       "en": "T-Absence"
     },
     "type": "float",
@@ -1804,7 +1805,7 @@
     "divisor": 10,
     "id": "t_dhw",
     "name": {
-      "de": "T-WW",
+      "de": "Warmwasser-Temperatur",
       "en": "T-DHW"
     },
     "type": "float",
@@ -1827,7 +1828,7 @@
     "divisor": 10,
     "id": "t_dhw1",
     "name": {
-      "de": "Tdhw",
+      "de": "Warmwasser-Temperatur",
       "en": "Tdhw"
     },
     "type": "float",
@@ -1850,7 +1851,7 @@
     "divisor": 10,
     "id": "t_dhw_1_min",
     "name": {
-      "de": "Schaltschwelle TDHW",
+      "de": "Schaltschwelle Warmwasser-Temperatur",
       "en": "T-DHW 1 min"
     },
     "type": "float",
@@ -1873,7 +1874,7 @@
     "divisor": 10,
     "id": "t_dhw_set",
     "name": {
-      "de": "T-WW Soll",
+      "de": "Soll Warmwasser-Temperatur",
       "en": "T-DHW Setpoint"
     },
     "type": "float",
@@ -1896,7 +1897,7 @@
     "divisor": 10,
     "id": "t_dhw_setpoint1",
     "name": {
-      "de": "T-WW Soll 1",
+      "de": "Warmwasser-Temperatur Conf 1",
       "en": "T-ACS nom 1"
     },
     "type": "float",
@@ -1919,7 +1920,7 @@
     "divisor": 10,
     "id": "t_dhw_setpoint2",
     "name": {
-      "de": "T-WW Soll 1",
+      "de": "Warmwasser-Temperatur Conf 2",
       "en": "T-ACS nom 2"
     },
     "type": "float",
@@ -1942,7 +1943,7 @@
     "divisor": 10,
     "id": "t_dhw_setpoint3",
     "name": {
-      "de": "T-WW Soll 1",
+      "de": "Warmwasser-Temperatur Conf 3",
       "en": "T-ACS nom 3"
     },
     "type": "float",
@@ -1959,13 +1960,13 @@
       "command": "62 10 FA 0A 0C"
     },
     "description": {
-      "de": "Angezeigt wird die gemittelte Aussentemperatur in C.",
+      "de": "Angezeigt wird die gemittelte Außentemperatur in C.",
       "en": "The average external temperature is displayed C."
     },
     "divisor": 10,
     "id": "t_ext",
     "name": {
-      "de": "T-Aussen",
+      "de": "Außentemperatur",
       "en": "T-Outside"
     },
     "type": "float",
@@ -1988,7 +1989,7 @@
     "divisor": 10,
     "id": "t_flow_ch_adj",
     "name": {
-      "de": "Anpassung T-VL Heizen",
+      "de": "Anpassung Vorlauftemperatur kühlen",
       "en": "T-Flow CH adj"
     },
     "type": "float",
@@ -2011,7 +2012,7 @@
     "divisor": 10,
     "id": "t_flow_cool",
     "name": {
-      "de": "T-VL Kühlen",
+      "de": "Soll Vorlauftemperatur kühlen",
       "en": "T-Flow Cooling"
     },
     "type": "float",
@@ -2057,7 +2058,7 @@
     "divisor": 10,
     "id": "t_flow_cool_max",
     "name": {
-      "de": "VL-Soll Max Kühlen",
+      "de": "Max Soll Vorlauftemperatur Kühlen",
       "en": "T-Flow Cooling max"
     },
     "type": "float",
@@ -2080,7 +2081,7 @@
     "divisor": 10,
     "id": "t_flow_cool_start",
     "name": {
-      "de": "VL-Soll Start Kühlen",
+      "de": "Start Soll Vorlauftemperatur Kühlen",
       "en": "T-Flow Cooling start"
     },
     "type": "float",
@@ -2097,13 +2098,13 @@
       "command": "32 10 FA 03 DD"
     },
     "description": {
-      "de": "T-Flow Kühlung",
+      "de": "Soll Vorlauftemperatur Kühlung",
       "en": "Setting the cooling inflow target temperature (fixed value) when cooling mode is active"
     },
     "divisor": 10,
     "id": "t_flow_cooling",
     "name": {
-      "de": "T-Flow Kühlung",
+      "de": "Soll Vorlauftemperatur Kühlung",
       "en": "T-Flow Cooling"
     },
     "type": "float",
@@ -2126,7 +2127,7 @@
     "divisor": 10,
     "id": "t_flow_day",
     "name": {
-      "de": "T-Vorlauf Tag",
+      "de": "Soll Vorlauftemperatur Tag",
       "en": "T-Flow Day"
     },
     "type": "float",
@@ -2149,7 +2150,7 @@
     "divisor": 10,
     "id": "t_flow_night",
     "name": {
-      "de": "T-Vorlauf Nacht",
+      "de": "Soll Vorlauftemperatur Nacht",
       "en": "T-Flow night"
     },
     "type": "float",
@@ -2172,7 +2173,7 @@
     "divisor": 1,
     "id": "t_frost_protect",
     "name": {
-      "de": "T-Frostschutz",
+      "de": "Frostschutz bei Außentemperatur",
       "en": "T-Frost Protect"
     },
     "type": "longint",
@@ -2195,7 +2196,7 @@
     "divisor": 10,
     "id": "t_hc",
     "name": {
-      "de": "T-HK",
+      "de": "Vorlauftemperatur Heizkreis",
       "en": "T-HC"
     },
     "type": "float",
@@ -2218,7 +2219,7 @@
     "divisor": 10,
     "id": "t_hc_set",
     "name": {
-      "de": "T-HK Soll",
+      "de": "Soll Vorlauftemperatur Heizkreis",
       "en": "T-HC Setpoint"
     },
     "type": "float",
@@ -2241,7 +2242,7 @@
     "divisor": 10,
     "id": "t_hs",
     "name": {
-      "de": "T-WE",
+      "de": "Vorlauftemperatur Wärmeerzeuger",
       "en": "T-HS"
     },
     "type": "float",
@@ -2264,7 +2265,7 @@
     "divisor": 10,
     "id": "t_hs_set",
     "name": {
-      "de": "T-WE Soll",
+      "de": "Soll Vorlauftemperatur Wärmeerzeuger",
       "en": "T-HS Setpoint"
     },
     "type": "float",
@@ -2327,13 +2328,13 @@
       "command": "32 10 FA C0 FF"
     },
     "description": {
-      "de": "Aktuelle Aussentemperatur (gemessen von optionalem Temperaturfühler RoCon OT1)",
+      "de": "Aktuelle Außentemperatur (gemessen von optionalem Temperaturfühler RoCon OT1)",
       "en": "Actual outdoor temperature (measured by optional temperature sensor RoCon OT1)"
     },
     "divisor": 10,
     "id": "t_outdoor_ot1",
     "name": {
-      "de": "TA",
+      "de": "Außentemperatur",
       "en": "TA"
     },
     "type": "float",
@@ -2356,7 +2357,7 @@
     "divisor": 10,
     "id": "t_r1",
     "name": {
-      "de": "TR",
+      "de": "Rücklauftemperatur",
       "en": "TR"
     },
     "type": "float",
@@ -2379,7 +2380,7 @@
     "divisor": 10,
     "id": "t_reduced",
     "name": {
-      "de": "T-Absenkung",
+      "de": "Soll Raumtemperatur Absenkung",
       "en": "T-Reduced"
     },
     "type": "float",
@@ -2402,7 +2403,7 @@
     "divisor": 10,
     "id": "t_return",
     "name": {
-      "de": "T-Rücklauf",
+      "de": "Rücklauftemperatur",
       "en": "T-Return"
     },
     "type": "float",
@@ -2421,7 +2422,7 @@
     "divisor": 10,
     "id": "t_room",
     "name": {
-      "de": "T-Raum",
+      "de": "Raumtemperatur",
       "en": "T-Room"
     },
     "type": "float",
@@ -3157,7 +3158,7 @@
     "divisor": 10,
     "id": "t_v1",
     "name": {
-      "de": "TV",
+      "de": "Vorlauftemperatur Plattenwärmetauscher",
       "en": "TV"
     },
     "type": "float",
@@ -3180,7 +3181,7 @@
     "divisor": 10,
     "id": "t_vbh",
     "name": {
-      "de": "TVBH",
+      "de": "Vorlauftemperatur Heizkreis",
       "en": "TVBH"
     },
     "type": "float",
@@ -3203,7 +3204,7 @@
     "divisor": 10,
     "id": "t_vbh1_max",
     "name": {
-      "de": "Max Temp Heizung",
+      "de": "Max Soll Vorlauftemperatur Heizungsunterstützung",
       "en": "T vbh1 max"
     },
     "type": "float",
@@ -3220,13 +3221,13 @@
       "command": "32 10 FA C1 05"
     },
     "description": {
-      "de": "Aktuelle Aussentemperatur (gemessen von Temperaturfühler des Wärmepumpenaussengeräts)",
+      "de": "Aktuelle Außentemperatur (gemessen von Temperaturfühler des Wärmepumpenaussengeräts)",
       "en": "Actual outdoor temperature (measured by temperature sensor of the external heat pump)"
     },
     "divisor": 10,
     "id": "ta2",
     "name": {
-      "de": "TA2 [C]",
+      "de": "Außentemperatur",
       "en": "TA2 [C]"
     },
     "type": "float",
@@ -3243,13 +3244,13 @@
       "command": "32 10 FA C1 06"
     },
     "description": {
-      "de": "Current temperature in domestic hot water storage tank, secondary sensor (tDHW2).",
+      "de": "Aktuelle Warmwassertemperatur, sekundärer Sensor (tDHW2).",
       "en": "Current temperature in domestic hot water storage tank, secondary sensor (tDHW2)."
     },
     "divisor": 10,
     "id": "tdhw2",
     "name": {
-      "de": "Tdhw2 [C]",
+      "de": "Warmwassertemperatur 2",
       "en": "Tdhw2 [C]"
     },
     "type": "float",
@@ -3272,9 +3273,10 @@
     "divisor": 10,
     "id": "tdiff_dhw_ch",
     "name": {
-      "de": "TDiff-WW HZU",
+      "de": "Warmwasser Diff Heizungsunterstützung",
       "en": "TDiff-DHW CH"
     },
+    "unit": "deg",
     "type": "longint",
     "writable": true
   },
@@ -3294,7 +3296,7 @@
     "divisor": 1,
     "id": "timer_boh",
     "name": {
-      "de": "Wartezeit BOH",
+      "de": "Wartezeit Unterstützung durch zusätzlichen Wärmeerzeuger",
       "en": "Timer BOH"
     },
     "type": "longint",
@@ -3317,7 +3319,7 @@
     "divisor": 10,
     "id": "tliq2",
     "name": {
-      "de": "Tliq2 [C]",
+      "de": "Kältemitteltemperatur",
       "en": "Tliq2 [C]"
     },
     "type": "float",
@@ -3340,7 +3342,7 @@
     "divisor": 10,
     "id": "tr2",
     "name": {
-      "de": "TR2 [C]",
+      "de": "Rücklauftemperatur 2",
       "en": "TR2 [C]"
     },
     "type": "float",
@@ -3363,7 +3365,7 @@
     "divisor": 10,
     "id": "tvbh2",
     "name": {
-      "de": "TVBH2 [C]",
+      "de": "Vorlauftemperatur",
       "en": "TVBH2 [C]"
     },
     "type": "float",
@@ -3386,7 +3388,7 @@
     "divisor": 1,
     "id": "v1",
     "name": {
-      "de": "V",
+      "de": "Durchfluss",
       "en": "V"
     },
     "type": "longint",
@@ -3409,7 +3411,7 @@
     "divisor": 10,
     "id": "v_var",
     "name": {
-      "de": "DurchflussBer",
+      "de": "Durchfluss Min",
       "en": "V var"
     },
     "type": "longint",

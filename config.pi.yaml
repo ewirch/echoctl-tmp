@@ -1,0 +1,65 @@
+can:
+  iface: can0
+
+mqtt:
+  server: tcp://192.168.2.145:1883
+  client-id: echoctl-1
+  value-topic-prefix: daikin
+  user: echoctl
+  password: sahsaoetnhu
+
+subscriptions:
+  - command: delta_t_ch
+    delay: 30s
+  - command: flow_rate
+    delay: 30s
+  - command: max_t_flow
+    delay: 30s
+  - command: min_t_flow
+    delay: 30s
+  - command: mode
+    delay: 30s
+  - command: mode_01
+    delay: 30s
+  - command: posmix
+    delay: 30s
+  - command: qch
+    delay: 30s
+  - command: qdhw
+    delay: 30s
+  - command: qwp
+    delay: 30s
+  - command: status_pump
+    delay: 30s
+  - command: t_dhw
+    delay: 30s
+  - command: t_dhw_set
+    delay: 30s
+  - command: t_dhw_setpoint1
+    delay: 30s
+  - command: t_dhw_setpoint2
+    delay: 30s
+  - command: t_dhw_setpoint3
+    delay: 30s
+  - command: t_ext
+    delay: 30s
+  - command: t_hc
+    delay: 30s
+  - command: t_hc_set
+    delay: 30s
+  - command: t_hs
+    delay: 30s
+  - command: t_hs_set
+    delay: 30s
+  - command: t_return
+    delay: 30s
+  - command: tliq2
+    delay: 30s
+  - command: v1
+    delay: 30s
+
+lang: de
+
+homeassistant:
+  discovery-topic-prefix: homeassistant
+

@@ -1,23 +1,5 @@
 package homeassistant
 
-import "time"
-
-type sensor struct {
-	id            string
-	deviceClass   string
-	stateClass    string
-	friendlyName  string
-	unit          string
-	icon          string
-	valueTemplate string
-	stats         sensorStats
-}
-type sensorStats struct {
-	stateCharacteristic string
-	samplingSize        int
-	maxAge              time.Duration
-}
-
 type device struct {
 	Identifiers  []string `json:"identifiers,omitempty"`
 	Manufacturer string   `json:"manufacturer,omitempty"`
@@ -26,16 +8,18 @@ type device struct {
 }
 
 type entity struct {
-	Device            device `json:"device"`
-	ObjectId          string `json:"object_id,omitempty"`
-	UniqueId          string `json:"unique_id,omitempty"`
-	Name              string `json:"name,omitempty"`
-	StateTopic        string `json:"state_topic,omitempty"`
-	UnitOfMeasurement string `json:"unit_of_measurement,omitempty"`
-	Icon              string `json:"icon,omitempty"`
-	DeviceClass       string `json:"device_class,omitempty"`
-	StateClass        string `json:"state_class,omitempty"`
-	ValueTemplate     string `json:"value_template,omitempty"`
+	Device                    device `json:"device"`
+	ObjectId                  string `json:"object_id,omitempty"`
+	UniqueId                  string `json:"unique_id,omitempty"`
+	Name                      string `json:"name,omitempty"`
+	StateTopic                string `json:"state_topic,omitempty"`
+	UnitOfMeasurement         string `json:"unit_of_measurement,omitempty"`
+	Icon                      string `json:"icon,omitempty"`
+	DeviceClass               string `json:"device_class,omitempty"`
+	StateClass                string `json:"state_class,omitempty"`
+	ValueTemplate             string `json:"value_template,omitempty"`
+	ExpiresAfter              int64  `json:"expires_after"`
+	SuggestedDisplayPrecision int    `json:"suggested_display_precision"`
 }
 
 func daikinAltherma() device {
@@ -44,20 +28,5 @@ func daikinAltherma() device {
 		Manufacturer: "Daikin",
 		Model:        "EKHWMX500C",
 		Name:         "Altherma M ECH₂O",
-	}
-}
-
-func (sensor *sensor) asEntity() entity {
-	return entity{
-		Device:            daikinAltherma(),
-		ObjectId:          sensor.id,
-		UniqueId:          "daikin/" + sensor.id,
-		Name:              sensor.friendlyName,
-		StateTopic:        "daikin/" + sensor.id,
-		UnitOfMeasurement: sensor.unit,
-		Icon:              sensor.icon,
-		DeviceClass:       sensor.deviceClass,
-		StateClass:        sensor.stateClass,
-		ValueTemplate:     sensor.valueTemplate,
 	}
 }

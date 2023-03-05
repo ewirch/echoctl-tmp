@@ -46,8 +46,9 @@ const (
 	UnitLh
 	UnitPercent
 	UnitWh
-	UnitKw
+	UnitKwh
 	UnitW
+	UnitKw
 	UnitSec
 	UnitMin
 	UnitHour

@@ -82,6 +82,8 @@ func selectOnSlice(channelFunction func(*tomb.Tomb) <-chan struct{}, tombs []*to
 			Chan: reflect.ValueOf(channelFunction(t)),
 		}
 	}
-	chosenIdx, _, _ = reflect.Select(cases)
+	chosenIdx, rcvValue, ok := reflect.Select(cases)
+	_ = rcvValue
+	_ = ok
 	return chosenIdx, tombs[chosenIdx]
 }

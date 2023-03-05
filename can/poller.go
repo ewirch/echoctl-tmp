@@ -2,10 +2,13 @@ package can
 
 import (
 	"echoctl/conf"
+	"echoctl/flowcontrol"
+	"errors"
 	"github.com/benbjohnson/clock"
 	"github.com/go-daq/canbus"
 	"go.uber.org/zap"
 	"gopkg.in/tomb.v2"
+	"syscall"
 	"time"
 )
 
@@ -61,15 +64,20 @@ func (poller *poller) poll() error {
 			return tomb.ErrDying
 
 		case <-timer.C:
-			if err := poller.sendCommand(job.subscription.Command); err != nil {
+			err := poller.sendCommand(job.subscription.Command)
+			if flowcontrol.IsShouldRetry(err) {
+				// Retry sending command, but delay a bit, to not directly fail again on retry.
+				poller.schedule(job, 100*time.Millisecond)
+			} else if err != nil {
 				return err
+			} else {
+				poller.schedule(job, job.subscription.Delay)
 			}
-			poller.updateNextTime(job)
 
 		case cmd := <-poller.inbound:
 			job := findJob(schedule, cmd)
 			if job != nil {
-				poller.updateNextTime(job)
+				poller.schedule(job, job.subscription.Delay)
 			}
 
 		}
@@ -100,6 +108,10 @@ func (poller *poller) sendCommand(command conf.Command) error {
 	}
 
 	_, err := poller.socket.Send(requestFrame)
+	if errors.Is(err, syscall.ENOBUFS) {
+		poller.log.Debug("sending failed, send buffer full. retrying.")
+		return sendBufferFullError{}
+	}
 	if err != nil {
 		return err
 	}
@@ -108,7 +120,7 @@ func (poller *poller) sendCommand(command conf.Command) error {
 
 func getNextJob(schedule []job) (nextJob *job) {
 	nextJob = &schedule[0]
-	for i, _ := range schedule {
+	for i := range schedule {
 		if schedule[i].nextTime.Before(nextJob.nextTime) {
 			nextJob = &schedule[i]
 		}
@@ -121,12 +133,11 @@ func (poller *poller) createSchedule(subscriptions []Subscription) []job {
 	now := poller.clock.Now()
 	for i, subscription := range subscriptions {
 		schedule[i].subscription = subscription
-		//poller.updateNextTime(&schedule[i])
 		schedule[i].nextTime = now
 	}
 	return schedule
 }
 
-func (poller *poller) updateNextTime(job *job) {
-	job.nextTime = poller.clock.Now().Add(job.subscription.Delay)
+func (poller *poller) schedule(job *job, duration time.Duration) {
+	job.nextTime = poller.clock.Now().Add(duration)
 }

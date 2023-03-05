@@ -1,3 +1,6 @@
+- fix: mode 4
+- use mqtt 5
+- expose echoctl settings in add-on
 - post device/sensor configuration to mqtt
   - read sensor configuration
   - post on start
@@ -6,5 +9,5 @@
 - mqtt write channel
   - configure writable sensors
   - configure sensors to listen to (alternative: listen to all writable sensors)
-  - listen on a key
+  - listen to a key
   - post to canbus

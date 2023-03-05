@@ -181,7 +181,7 @@ func expectCommand(t *testing.T, socket SocketMock, canId conf.CanId) {
 	}
 }
 
-// makePollerIterate() solves the problem of synchronising the test go routine and the Poller go routine. The Poller main loop consumes from the inbound channel and from the send timer channel. inbound is created as an unbuffered channel. The finished send operation guarantees that the main loop iterated.
+// makePollerIterate() solves the problem of synchronising the test go routine and the Poller go routine. The Poller main loop consumes from the inbound channel and from the send timer channel. Inbound is created as an unbuffered channel. The finished send operation guarantees that the main loop iterated.
 func makePollerIterate(inbound chan<- conf.Command) {
 	inbound <- NewUnknownCommand()
 	inbound <- NewUnknownCommand()

@@ -8,11 +8,11 @@ import (
 	"strings"
 )
 
-const _UnitName = "nonedegbarlhpercentwhkwwsecminhour"
+const _UnitName = "nonedegbarlhpercentwhkwhwkwsecminhour"
 
-var _UnitIndex = [...]uint8{0, 4, 7, 10, 12, 19, 21, 23, 24, 27, 30, 34}
+var _UnitIndex = [...]uint8{0, 4, 7, 10, 12, 19, 21, 24, 25, 27, 30, 33, 37}
 
-const _UnitLowerName = "nonedegbarlhpercentwhkwwsecminhour"
+const _UnitLowerName = "nonedegbarlhpercentwhkwhwkwsecminhour"
 
 func (i Unit) String() string {
 	if i < 0 || i >= Unit(len(_UnitIndex)-1) {
@@ -31,14 +31,15 @@ func _UnitNoOp() {
 	_ = x[UnitLh-(3)]
 	_ = x[UnitPercent-(4)]
 	_ = x[UnitWh-(5)]
-	_ = x[UnitKw-(6)]
+	_ = x[UnitKwh-(6)]
 	_ = x[UnitW-(7)]
-	_ = x[UnitSec-(8)]
-	_ = x[UnitMin-(9)]
-	_ = x[UnitHour-(10)]
+	_ = x[UnitKw-(8)]
+	_ = x[UnitSec-(9)]
+	_ = x[UnitMin-(10)]
+	_ = x[UnitHour-(11)]
 }
 
-var _UnitValues = []Unit{UnitNone, UnitDeg, UnitBar, UnitLh, UnitPercent, UnitWh, UnitKw, UnitW, UnitSec, UnitMin, UnitHour}
+var _UnitValues = []Unit{UnitNone, UnitDeg, UnitBar, UnitLh, UnitPercent, UnitWh, UnitKwh, UnitW, UnitKw, UnitSec, UnitMin, UnitHour}
 
 var _UnitNameToValueMap = map[string]Unit{
 	_UnitName[0:4]:        UnitNone,
@@ -53,16 +54,18 @@ var _UnitNameToValueMap = map[string]Unit{
 	_UnitLowerName[12:19]: UnitPercent,
 	_UnitName[19:21]:      UnitWh,
 	_UnitLowerName[19:21]: UnitWh,
-	_UnitName[21:23]:      UnitKw,
-	_UnitLowerName[21:23]: UnitKw,
-	_UnitName[23:24]:      UnitW,
-	_UnitLowerName[23:24]: UnitW,
-	_UnitName[24:27]:      UnitSec,
-	_UnitLowerName[24:27]: UnitSec,
-	_UnitName[27:30]:      UnitMin,
-	_UnitLowerName[27:30]: UnitMin,
-	_UnitName[30:34]:      UnitHour,
-	_UnitLowerName[30:34]: UnitHour,
+	_UnitName[21:24]:      UnitKwh,
+	_UnitLowerName[21:24]: UnitKwh,
+	_UnitName[24:25]:      UnitW,
+	_UnitLowerName[24:25]: UnitW,
+	_UnitName[25:27]:      UnitKw,
+	_UnitLowerName[25:27]: UnitKw,
+	_UnitName[27:30]:      UnitSec,
+	_UnitLowerName[27:30]: UnitSec,
+	_UnitName[30:33]:      UnitMin,
+	_UnitLowerName[30:33]: UnitMin,
+	_UnitName[33:37]:      UnitHour,
+	_UnitLowerName[33:37]: UnitHour,
 }
 
 var _UnitNames = []string{
@@ -72,11 +75,12 @@ var _UnitNames = []string{
 	_UnitName[10:12],
 	_UnitName[12:19],
 	_UnitName[19:21],
-	_UnitName[21:23],
-	_UnitName[23:24],
-	_UnitName[24:27],
+	_UnitName[21:24],
+	_UnitName[24:25],
+	_UnitName[25:27],
 	_UnitName[27:30],
-	_UnitName[30:34],
+	_UnitName[30:33],
+	_UnitName[33:37],
 }
 
 // UnitString retrieves an enum value from the enum constants string name.

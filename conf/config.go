@@ -17,6 +17,8 @@ type Can struct {
 type Mqtt struct {
 	Server           string
 	ClientId         string `yaml:"client-id"`
+	User             string
+	Password         string
 	ValueTopicPrefix string `yaml:"value-topic-prefix"`
 }
 

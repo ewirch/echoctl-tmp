@@ -2,7 +2,6 @@ package homeassistant
 
 import (
 	"echoctl/can"
-	"echoctl/conf"
 	"fmt"
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"go.uber.org/zap"
@@ -50,13 +49,16 @@ func (p *discovery) announce() error {
 	if err != nil {
 		return err
 	}
-	// FIXME subscribe to discovery topic
+
+	// FIXME subscribe to discovery topic. Until then: wait on Dying() to keep app running.
+	<-p.tomb.Dying()
+
 	return nil
 }
 
 func (p *discovery) publishNodeConfigurations() error {
 	for i := range p.subscriptions {
-		err := p.publishNodeConf(&p.subscriptions[i].Command)
+		err := p.publishNodeConf(&p.subscriptions[i])
 		if err != nil {
 			return err
 		}
@@ -64,14 +66,14 @@ func (p *discovery) publishNodeConfigurations() error {
 	return nil
 }
 
-func (p *discovery) publishNodeConf(command *conf.Command) error {
-	json, err := AsEntityJson(command, p.lang, p.log)
+func (p *discovery) publishNodeConf(subscription *can.Subscription) error {
+	json, err := AsEntityJson(subscription, p.lang, p.log)
 	if err != nil {
-		return fmt.Errorf("publish node configuration for command %s: %w", command.Id, err)
+		return fmt.Errorf("publish node configuration for command %s: %w", subscription.Command.Id, err)
 	}
 
 	token := p.client.Publish(
-		p.discoveryTopicPrefix+"/sensor/daikin_altherma/"+command.Id+"/config",
+		p.discoveryTopicPrefix+"/sensor/daikin_altherma/"+subscription.Command.Id+"/config",
 		qos,
 		true,
 		json,
@@ -81,6 +83,10 @@ func (p *discovery) publishNodeConf(command *conf.Command) error {
 	case <-p.tomb.Dying():
 		return tomb.ErrDying
 	case <-token.Done():
-		return token.Error()
+		if err := token.Error(); err == nil {
+			return nil
+		} else {
+			return fmt.Errorf("DiscoveryAnnouncer.mqttClient.Publish(): %w", err)
+		}
 	}
 }

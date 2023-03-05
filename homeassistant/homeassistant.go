@@ -1,6 +1,7 @@
 package homeassistant
 
 import (
+	"echoctl/can"
 	"echoctl/conf"
 	"encoding/json"
 	"fmt"
@@ -8,21 +9,41 @@ import (
 	"golang.org/x/exp/maps"
 )
 
-func AsEntityJson(cmd *conf.Command, lang string, log *zap.Logger) ([]byte, error) {
-	id := cmd.Id
-	unit := cmd.Unit
+func AsEntityJson(subscription *can.Subscription, lang string, log *zap.Logger) ([]byte, error) {
+	id := subscription.Command.Id
+	unit := subscription.Command.Unit
 	e := entity{
-		Device:            daikinAltherma(),
-		ObjectId:          id,
-		UniqueId:          "daikin/" + id,
-		Name:              localize(id, cmd.Name, lang, log),
-		StateTopic:        "daikin/" + id,
-		UnitOfMeasurement: mapUnit(unit),
-		Icon:              mapIcon(unit),
-		DeviceClass:       mapDeviceClass(unit),
-		StateClass:        mapStateClass(unit),
+		Device:                    daikinAltherma(),
+		ObjectId:                  id,
+		UniqueId:                  "daikin/" + id,
+		Name:                      localize(id, subscription.Command.Name, lang, log),
+		StateTopic:                "daikin/" + id,
+		UnitOfMeasurement:         mapUnit(unit),
+		Icon:                      mapIcon(unit),
+		DeviceClass:               mapDeviceClass(unit),
+		StateClass:                mapStateClass(unit),
+		ExpiresAfter:              expiresAfter(subscription),
+		SuggestedDisplayPrecision: suggestedDisplayPrecision(unit),
 	}
 	return json.Marshal(e)
+}
+
+func suggestedDisplayPrecision(unit conf.Unit) int {
+	if !unit.IsAUnit() {
+		panic(fmt.Sprintf("%v is not a conf.Unit", unit))
+	}
+	switch unit {
+	case conf.UnitDeg, conf.UnitBar, conf.UnitWh, conf.UnitW:
+		return 2
+	case conf.UnitKw, conf.UnitKwh:
+		return 3
+	case conf.UnitLh:
+		return 1
+	case conf.UnitPercent, conf.UnitNone, conf.UnitSec, conf.UnitMin, conf.UnitHour:
+		return 0
+	default:
+		return 0
+	}
 }
 
 func mapDeviceClass(unit conf.Unit) string {
@@ -34,12 +55,10 @@ func mapDeviceClass(unit conf.Unit) string {
 		return "temperature"
 	case conf.UnitBar:
 		return "pressure"
-	case conf.UnitWh:
+	case conf.UnitWh, conf.UnitKwh:
 		return "energy"
-	case conf.UnitW:
-		return ""
-	case conf.UnitKw:
-		return ""
+	case conf.UnitW, conf.UnitKw:
+		return "power"
 	case conf.UnitNone:
 		return ""
 	case conf.UnitLh:
@@ -61,10 +80,16 @@ func mapStateClass(unit conf.Unit) string {
 	if !unit.IsAUnit() {
 		panic(fmt.Sprintf("%v is not a conf.Unit", unit))
 	}
-	if unit == conf.UnitWh {
+	switch unit {
+	case conf.UnitDeg, conf.UnitBar, conf.UnitW, conf.UnitKw, conf.UnitLh, conf.UnitPercent, conf.UnitSec, conf.UnitMin, conf.UnitHour:
+		return "measurement"
+	case conf.UnitWh, conf.UnitKwh:
 		return "total_increasing"
+	case conf.UnitNone:
+		return ""
+	default:
+		return ""
 	}
-	return "measurement"
 }
 
 func mapUnit(unit conf.Unit) string {
@@ -82,10 +107,12 @@ func mapUnit(unit conf.Unit) string {
 		return "%"
 	case conf.UnitWh:
 		return "Wh"
-	case conf.UnitKw:
-		return "kW"
+	case conf.UnitKwh:
+		return "kWh"
 	case conf.UnitW:
 		return "W"
+	case conf.UnitKw:
+		return "kW"
 	case conf.UnitSec:
 		return "s"
 	case conf.UnitMin:
@@ -108,11 +135,7 @@ func mapIcon(unit conf.Unit) string {
 		return "mdi:thermometer"
 	case conf.UnitBar:
 		return "mdi:car-brake-low-pressure"
-	case conf.UnitWh:
-		return "mdi:lightning-bolt"
-	case conf.UnitKw:
-		return "mdi:lightning-bolt"
-	case conf.UnitW:
+	case conf.UnitWh, conf.UnitKwh, conf.UnitKw, conf.UnitW:
 		return "mdi:lightning-bolt"
 	case conf.UnitLh:
 		return ""
@@ -138,4 +161,10 @@ func localize(id string, dict map[string]string, lang string, log *zap.Logger) s
 		text = maps.Values(dict)[0]
 	}
 	return text
+}
+
+// expiresAfter returns the duration in seconds after the last update, after which the sensor can be considered as unavailable.
+func expiresAfter(subscription *can.Subscription) int64 {
+	// We allow twice the update duration. If the sensor was not updated at that time, probably something is wrong, and the sensor should be considered unavailable.
+	return int64(subscription.Delay.Seconds() * 2)
 }

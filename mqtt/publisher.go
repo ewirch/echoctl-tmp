@@ -69,7 +69,11 @@ func (p *publisher) publishCmd(cmd dispatcher.CommandValue) error {
 	token := p.publishCmdValue(cmd, value)
 	select {
 	case <-token.Done():
-		return token.Error()
+		if err := token.Error(); err == nil {
+			return nil
+		} else {
+			return fmt.Errorf("Publisher.mqttClient.Publish(): %w", err)
+		}
 
 	case <-p.tomb.Dying():
 		return tomb.ErrDying
@@ -131,5 +135,5 @@ func getLabel(code uint16, labelMap map[string]int) (string, error) {
 			return label, nil
 		}
 	}
-	return "", mappingNotFoundError{code}
+	return strconv.Itoa(int(code)), nil
 }

@@ -2,9 +2,11 @@ can:
   iface: vcan0
 
 mqtt:
-  server: tcp://homeassistant.local:1883
+  server: tcp://192.168.2.145:1883
   client-id: mqtt-test-1
   value-topic-prefix: dbg
+  user: echoctl
+  password: sahsaoetnhu
 
 subscriptions:
   - command: t_hs

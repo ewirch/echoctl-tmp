@@ -25,7 +25,7 @@ type mqttLoggerZapAdapter struct {
 	printf func(string, ...interface{})
 }
 
-func NewClient(serverAddress string, clientId string, log *zap.Logger, routes Routes) (mqtt.Client, error) {
+func NewClient(serverAddress string, clientId string, user string, password string, log *zap.Logger, routes Routes) (mqtt.Client, error) {
 	sugaredLogger := log.Sugar()
 	mqtt.ERROR = mqttLoggerZapAdapter{print: sugaredLogger.Error, printf: sugaredLogger.Errorf}
 	mqtt.CRITICAL = mqttLoggerZapAdapter{print: sugaredLogger.Error, printf: sugaredLogger.Errorf}
@@ -37,7 +37,7 @@ func NewClient(serverAddress string, clientId string, log *zap.Logger, routes Ro
 		routes: routes,
 	}
 
-	clientOptions := getMqttClientOptions(serverAddress, clientId)
+	clientOptions := getMqttClientOptions(serverAddress, clientId, user, password)
 	// When using QOS2 and CleanSession=FALSE, then it is possible that we will receive messages on topics that we have not subscribed to here (if they were previously subscribed to they are part of the session and survive disconnect/reconnect). Adding a DefaultPublishHandler lets us detect this.
 	clientOptions.DefaultPublishHandler = configurer.defaultPublisherHandler
 	clientOptions.OnConnect = configurer.onConnect
@@ -55,7 +55,11 @@ func (c *mqttConfigurer) connectWithTimeout(client mqtt.Client, ctx context.Cont
 	token := client.Connect()
 	select {
 	case <-token.Done():
-		return token.Error()
+		if err := token.Error(); err == nil {
+			return nil
+		} else {
+			return fmt.Errorf("mqttClient.Connect(): %w", err)
+		}
 	case <-ctx.Done():
 		return fmt.Errorf("timeout waiting con client.Connect()")
 	}
@@ -68,10 +72,12 @@ func addRoutes(client mqtt.Client, routes Routes) {
 	}
 }
 
-func getMqttClientOptions(serverAddress string, clientId string) *mqtt.ClientOptions {
+func getMqttClientOptions(serverAddress string, clientId string, user string, password string) *mqtt.ClientOptions {
 	clientOptions := mqtt.NewClientOptions()
 	clientOptions.AddBroker(serverAddress)
 	clientOptions.SetClientID(clientId)
+	clientOptions.Username = user
+	clientOptions.Password = password
 	clientOptions.SetOrderMatters(false)
 	clientOptions.ConnectTimeout = 1 * time.Second
 	clientOptions.WriteTimeout = 1 * time.Second

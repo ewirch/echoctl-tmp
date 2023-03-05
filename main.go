@@ -27,7 +27,7 @@ cansend vcan0 '180#3210FA01800100'
 cansend vcan0 '180#3210FAC0F60300'
 */
 
-const version = "1.0"
+const version = "1.2.1"
 const usage = `Altherma ECH₂O Control.
 
 Usage:
@@ -76,7 +76,7 @@ func main() {
 				return dispatcher.NewDispatcher(canReaderToDispatcher, maps.Values(commands), dispatcherToRequestor, dispatcherToMqttPublisher, log.Named("disp"))
 			},
 			func(log *zap.Logger) (phaoMqtt.Client, error) {
-				return mqtt.NewClient(configuration.Mqtt.Server, configuration.Mqtt.ClientId, log.Named("mqtt"), nil)
+				return mqtt.NewClient(configuration.Mqtt.Server, configuration.Mqtt.ClientId, configuration.Mqtt.User, configuration.Mqtt.Password, log.Named("mqtt"), nil)
 			},
 			func(client phaoMqtt.Client, log *zap.Logger) mqtt.Publisher {
 				return mqtt.NewPublisher(configuration.Mqtt.ValueTopicPrefix, dispatcherToMqttPublisher, client, log.Named("publ"))
