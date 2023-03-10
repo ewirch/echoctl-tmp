@@ -121,7 +121,7 @@ func TestFunction(t *testing.T) {
 			inbound <- canbus.Frame{ID: 123, Data: []byte{3, 7, 5, 4, 3}}
 			select {
 			case commValue := <-toMqttPublisher:
-				assert.Equal(t, int16(3*256+4), commValue.Value, "ID is different. Wrong match?")
+				assert.Equal(t, int16(4*256+3), commValue.Value, "ID is different. Wrong match?")
 			case <-time.After(time.Second):
 				t.Log("Timeout waiting for data from toRequestor.")
 			}

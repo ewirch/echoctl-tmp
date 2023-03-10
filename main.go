@@ -6,6 +6,7 @@ import (
 	"echoctl/dispatcher"
 	"echoctl/homeassistant"
 	"echoctl/mqtt"
+	"echoctl/schedule"
 	"fmt"
 	"github.com/benbjohnson/clock"
 	"github.com/docopt/docopt-go"
@@ -27,7 +28,7 @@ cansend vcan0 '180#3210FA01800100'
 cansend vcan0 '180#3210FAC0F60004'
 */
 
-const version = "1.2.3"
+const version = "1.2.4"
 const usage = `Altherma ECH₂O Control.
 
 Usage:
@@ -70,7 +71,8 @@ func main() {
 				return can.NewSocket(configuration.Can.Iface)
 			},
 			func(socket can.Socket, log *zap.Logger) can.Poller {
-				return can.NewPoller(socket, subscriptions, dispatcherToRequestor, clock.New(), log.Named("poller"))
+				clck := clock.New()
+				return can.NewPoller(socket, subscriptions, dispatcherToRequestor, schedule.NewScheduler[can.Subscription](clck), log.Named("poller"))
 			},
 			func(log *zap.Logger) dispatcher.Dispatcher {
 				return dispatcher.NewDispatcher(canReaderToDispatcher, maps.Values(commands), dispatcherToRequestor, dispatcherToMqttPublisher, log.Named("disp"))

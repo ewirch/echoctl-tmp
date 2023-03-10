@@ -10,10 +10,12 @@ type SocketMock interface {
 	can.Socket
 	Outbound() <-chan canbus.Frame
 	Inbound() chan<- canbus.Frame
+	NextSendError(error)
 }
 type socketMock struct {
-	outbound chan canbus.Frame
-	inbound  chan canbus.Frame
+	outbound      chan canbus.Frame
+	inbound       chan canbus.Frame
+	nextSendError *error
 }
 
 func (s *socketMock) Outbound() <-chan canbus.Frame {
@@ -31,8 +33,14 @@ func (s *socketMock) Close() error {
 }
 
 func (s *socketMock) Send(msg canbus.Frame) (int, error) {
-	s.outbound <- msg
-	return 1, nil
+	if s.nextSendError == nil {
+		s.outbound <- msg
+		return 1, nil
+	} else {
+		err := *s.nextSendError
+		s.nextSendError = nil
+		return 0, err
+	}
 }
 
 func (s *socketMock) RecvCtx(ctx context.Context) (msg canbus.Frame, err error) {
@@ -44,9 +52,15 @@ func (s *socketMock) RecvCtx(ctx context.Context) (msg canbus.Frame, err error) 
 	}
 }
 
+// NextSendError sets the error, which will be returned on next Send invocation.
+func (s *socketMock) NextSendError(err error) {
+	s.nextSendError = &err
+}
+
 func NewSocketMock() SocketMock {
 	return &socketMock{
-		outbound: make(chan canbus.Frame, 1),
-		inbound:  make(chan canbus.Frame, 1),
+		outbound:      make(chan canbus.Frame, 1),
+		inbound:       make(chan canbus.Frame, 1),
+		nextSendError: nil,
 	}
 }

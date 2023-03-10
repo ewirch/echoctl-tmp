@@ -3,196 +3,88 @@ package can_test
 import (
 	"echoctl/can"
 	"echoctl/conf"
-	"github.com/benbjohnson/clock"
+	"echoctl/schedule"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/zap"
+	"syscall"
 	"testing"
 	"time"
 )
 
-func TestPollerBlockingBehavior(t *testing.T) {
-
+func TestBlockingBehavior(t *testing.T) {
 	t.Run("exits on kill", func(t *testing.T) {
 		t.Parallel()
 
-		subscriptions := []can.Subscription{
-			{
-				Command: NewCommand(123),
-				Delay:   3 * time.Second,
-			},
-		}
-		poller, _, _, _ := NewPoller(subscriptions)
+		poller, _, _, _ := NewPoller()
 		runAndKillPoller(t, poller, func() {})
 	})
 }
 
-func TestPollerSchedule(t *testing.T) {
-	t.Run("send command following schedule", func(t *testing.T) {
+func TestSending(t *testing.T) {
+	t.Run("send command when triggered", func(t *testing.T) {
 		t.Parallel()
 
-		subscriptions := []can.Subscription{
-			{
-				Command: NewCommand(123),
-				Delay:   3 * time.Second,
-			},
-		}
-		poller, socket, inbound, clk := NewPoller(subscriptions)
+		poller, socket, _, nextTrigger := NewPoller()
+
 		runAndKillPoller(t, poller, func() {
-
-			makePollerIterate(inbound)
-			expectNoSentCommand(t, socket)
-
-			clk.Add(time.Second)
-			makePollerIterate(inbound)
-			expectNoSentCommand(t, socket)
-
-			clk.Add(time.Second)
-			makePollerIterate(inbound)
-			expectNoSentCommand(t, socket)
-
-			clk.Add(time.Second)
-			expectCommand(t, socket, 123)
+			nextTrigger <- newTrigger(123, time.Second)
+			cmd := readWithTimeout(t, socket.Outbound())
+			assert.Equal(t, uint32(123), cmd.ID, "Looks like we received the wrong command")
 		})
 	})
 
-	t.Run("re-sends command following schedule", func(t *testing.T) {
+	t.Run("reschedule successful sends with configured delay", func(t *testing.T) {
 		t.Parallel()
+		poller, _, scheduleRequests, nextTrigger := NewPoller()
 
-		subscriptions := []can.Subscription{
-			{
-				Command: NewCommand(123),
-				Delay:   3 * time.Second,
-			},
-			{
-				Command: NewCommand(456),
-				Delay:   7 * time.Second,
-			},
-		}
-		poller, socket, inbound, clk := NewPoller(subscriptions)
 		runAndKillPoller(t, poller, func() {
-			// synchronize go-routines: wait until poller gets in to the loop
-			makePollerIterate(inbound)
-
-			clk.Add(2 * time.Second)
-			// 00:02
-			makePollerIterate(inbound)
-			expectNoSentCommand(t, socket)
-
-			clk.Add(time.Second)
-			// 00:03
-			expectCommand(t, socket, 123)
-
-			clk.Add(2 * time.Second)
-			// 00:05
-			makePollerIterate(inbound)
-			expectNoSentCommand(t, socket)
-
-			clk.Add(time.Second)
-			// 00:06
-			expectCommand(t, socket, 123)
-
-			clk.Add(1 * time.Second)
-			// 00:07
-			expectCommand(t, socket, 456)
-
-			clk.Add(1 * time.Second)
-			// 00:08
-			makePollerIterate(inbound)
-			expectNoSentCommand(t, socket)
-
-			clk.Add(1 * time.Second)
-			// 00:09
-			expectCommand(t, socket, 123)
-
-			clk.Add(1 * time.Second)
-			// 00:10
-			makePollerIterate(inbound)
-			expectNoSentCommand(t, socket)
+			nextTrigger <- newTrigger(123, 3*time.Second)
+			scheduleRequest := readWithTimeout(t, scheduleRequests)
+			assert.Equal(t, 3*time.Second, scheduleRequest.TriggerIn, "the schedule request should have TriggerIn=3s")
 		})
 	})
 
-	t.Run("sends commands in schedule order", func(t *testing.T) {
+	t.Run("reschedule failed sends with short delay", func(t *testing.T) {
 		t.Parallel()
+		poller, socket, scheduleRequests, nextTrigger := NewPoller()
 
-		subscriptions := []can.Subscription{
-			{
-				Command: NewCommand(123),
-				Delay:   2 * time.Second,
-			},
-			{
-				Command: NewCommand(456),
-				Delay:   3 * time.Second,
-			},
-		}
-		poller, socket, inbound, clk := NewPoller(subscriptions)
 		runAndKillPoller(t, poller, func() {
-			// synchronize go-routines: wait until poller gets in to the loop
-			makePollerIterate(inbound)
-
-			clk.Add(2 * time.Second)
-			expectCommand(t, socket, 123)
-
-			clk.Add(time.Second)
-			expectCommand(t, socket, 456)
-		})
-	})
-
-	t.Run("inbound command changes schedule order", func(t *testing.T) {
-		t.Parallel()
-
-		subscriptions := []can.Subscription{
-			{
-				Command: NewCommand(123),
-				Delay:   2 * time.Second,
-			},
-		}
-		poller, socket, inbound, clk := NewPoller(subscriptions)
-		runAndKillPoller(t, poller, func() {
-			// synchronize go-routines: wait until poller gets in to the loop
-			makePollerIterate(inbound)
-
-			clk.Add(time.Second)
-			inbound <- NewCommand(123)
-			makePollerIterate(inbound)
-
-			clk.Add(time.Second)
-			expectNoSentCommand(t, socket)
-
-			clk.Add(time.Second)
-			expectCommand(t, socket, 123)
+			socket.NextSendError(syscall.ENOBUFS)
+			nextTrigger <- newTrigger(123, 3*time.Second)
+			scheduleRequest := readWithTimeout(t, scheduleRequests)
+			assert.Equal(t, can.RetryDelay, scheduleRequest.TriggerIn, "the schedule request should have a short TriggerIn")
 		})
 	})
 }
 
-func expectNoSentCommand(t *testing.T, socket SocketMock) {
-	select {
-	case <-socket.Outbound():
-		assert.Fail(t, "Command sent too early")
-	default:
+func newTrigger(canId conf.CanId, delay time.Duration) schedule.Trigger[can.Subscription] {
+	return schedule.Trigger[can.Subscription]{
+		Data: &can.Subscription{
+			Command: NewCommand(canId),
+			Delay:   delay,
+		},
+		TriggeredAt: time.Now(),
 	}
 }
 
-func expectCommand(t *testing.T, socket SocketMock, canId conf.CanId) {
+func readWithTimeout[T any](t *testing.T, ch <-chan T) *T {
 	select {
-	case cmd := <-socket.Outbound():
-		assert.Equal(t, uint32(canId), cmd.ID, "Looks like we received the wrong command")
+	case value := <-ch:
+		return &value
 	case <-time.After(time.Second):
 		assert.Fail(t, "Poller failed to send command in 1s")
+		return nil
 	}
 }
 
-// makePollerIterate() solves the problem of synchronising the test go routine and the Poller go routine. The Poller main loop consumes from the inbound channel and from the send timer channel. Inbound is created as an unbuffered channel. The finished send operation guarantees that the main loop iterated.
-func makePollerIterate(inbound chan<- conf.Command) {
-	inbound <- NewUnknownCommand()
-	inbound <- NewUnknownCommand()
-}
-
-func NewPoller(subscriptions []can.Subscription) (can.Poller, SocketMock, chan conf.Command, *clock.Mock) {
+func NewPoller() (can.Poller, SocketMock, chan schedule.Request[can.Subscription], chan schedule.Trigger[can.Subscription]) {
 	socket := NewSocketMock()
 	inbound := make(chan conf.Command)
-	clck := clock.NewMock()
-	poller := can.NewPoller(socket, subscriptions, inbound, clck, zap.NewNop())
-	return poller, socket, inbound, clck
+	scheduleRequests := make(chan schedule.Request[can.Subscription], 20)
+	nextTrigger := make(chan schedule.Trigger[can.Subscription])
+	scheduler := schedule.NewImmediatelyScheduler(scheduleRequests, nextTrigger)
+	poller := can.NewPoller(socket, []can.Subscription{}, inbound, scheduler, zap.NewNop())
+	return poller, socket, scheduleRequests, nextTrigger
 }
 
 func runAndKillPoller(t *testing.T, poller can.Poller, f func()) {
@@ -212,15 +104,6 @@ func NewCommand(canId conf.CanId) conf.Command {
 		Id: "001",
 		Request: conf.RequestCommand{
 			CanId:        canId,
-			CommandBytes: []byte{3, 7, 5},
-		},
-	}
-}
-func NewUnknownCommand() conf.Command {
-	return conf.Command{
-		Id: "654654",
-		Request: conf.RequestCommand{
-			CanId:        654654,
 			CommandBytes: []byte{3, 7, 5},
 		},
 	}

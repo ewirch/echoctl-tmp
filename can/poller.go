@@ -3,14 +3,16 @@ package can
 import (
 	"echoctl/conf"
 	"echoctl/flowcontrol"
+	"echoctl/schedule"
 	"errors"
-	"github.com/benbjohnson/clock"
 	"github.com/go-daq/canbus"
 	"go.uber.org/zap"
 	"gopkg.in/tomb.v2"
 	"syscall"
 	"time"
 )
+
+const RetryDelay = 100 * time.Millisecond
 
 type Subscription struct {
 	Command conf.Command
@@ -22,8 +24,8 @@ type poller struct {
 	subscriptions []Subscription
 	inbound       <-chan conf.Command
 	tomb          *tomb.Tomb
-	clock         clock.Clock
 	log           *zap.Logger
+	scheduler     schedule.Scheduler[Subscription]
 }
 
 // Poller sends periodic commands to a can-bus socket, following the specified schedule. Poller does not wait for a reply. It relies on Reader to read the reply from can-bus. The Reader passes the received frame to the Dispatcher, and the Dispatcher passes it on to Poller.
@@ -33,111 +35,80 @@ type Poller interface {
 
 var _ Poller = (*poller)(nil)
 
-type job struct {
-	nextTime     time.Time
-	subscription Subscription
-}
-
-func NewPoller(socket Socket, subscriptions []Subscription, inbound <-chan conf.Command, clck clock.Clock, log *zap.Logger) Poller {
+func NewPoller(socket Socket, subscriptions []Subscription, inbound <-chan conf.Command, scheduler schedule.Scheduler[Subscription], log *zap.Logger) Poller {
 	return &poller{
 		socket:        socket,
 		subscriptions: subscriptions,
 		inbound:       inbound,
 		tomb:          new(tomb.Tomb),
-		clock:         clck,
 		log:           log,
+		scheduler:     scheduler,
 	}
 }
 
 func (poller *poller) Poll() *tomb.Tomb {
 	poller.tomb.Go(poller.poll)
+	poller.tomb.Go(func() error {
+		poller.scheduler.Run(poller.tomb.Dying())
+		return nil
+	})
 	return poller.tomb
 }
 
 func (poller *poller) poll() error {
-	schedule := poller.createSchedule(poller.subscriptions)
+	poller.createSchedule(poller.subscriptions)
 	for {
-		job := getNextJob(schedule)
-		timer := poller.clock.Timer(poller.clock.Until(job.nextTime))
 		select {
+		case trigger := <-poller.scheduler.Next():
+			if err := poller.processTrigger(trigger); err != nil {
+				return err
+			}
+
+		case <-poller.inbound:
+			// Ignore inbound commands for now.
+
 		case <-poller.tomb.Dying():
 			return tomb.ErrDying
-
-		case <-timer.C:
-			err := poller.sendCommand(job.subscription.Command)
-			if flowcontrol.IsShouldRetry(err) {
-				// Retry sending command, but delay a bit, to not directly fail again on retry.
-				poller.schedule(job, 100*time.Millisecond)
-			} else if err != nil {
-				return err
-			} else {
-				poller.schedule(job, job.subscription.Delay)
-			}
-
-		case cmd := <-poller.inbound:
-			job := findJob(schedule, cmd)
-			if job != nil {
-				poller.schedule(job, job.subscription.Delay)
-			}
-
 		}
-		timer.Stop()
 	}
 }
 
-func (poller *poller) closeSocket(socket *canbus.Socket) {
-	if err := socket.Close(); err != nil {
-		poller.tomb.Kill(err)
+func (poller *poller) createSchedule(subscriptions []Subscription) {
+	for _, subscription := range subscriptions {
+		poller.scheduler.Schedule() <- schedule.Request[Subscription]{Data: &subscription, TriggerIn: subscription.Delay}
 	}
 }
 
-func findJob(schedule []job, cmd conf.Command) *job {
-	for i := range schedule {
-		if schedule[i].subscription.Command.Id == cmd.Id {
-			return &schedule[i]
-		}
+func (poller *poller) processTrigger(trigger schedule.Trigger[Subscription]) error {
+	err := poller.sendCommand(trigger.Data.Command)
+
+	if flowcontrol.IsShouldRetry(err) {
+		// Retry sending, but delay a bit, to not directly fail again on retry.
+		poller.scheduler.Schedule() <- schedule.Request[Subscription]{Data: trigger.Data, TriggerIn: RetryDelay}
+		return nil
 	}
+	if err != nil {
+		return err
+	}
+
+	// Command sent successfully, reschedule the next sending.
+	poller.scheduler.Schedule() <- schedule.Request[Subscription]{Data: trigger.Data, TriggerIn: trigger.Data.Delay}
 	return nil
 }
 
 func (poller *poller) sendCommand(command conf.Command) error {
 	poller.log.Debug("sending", zap.String("command", command.Id))
-	requestFrame := canbus.Frame{
-		ID:   uint32(command.Request.CanId),
-		Data: command.Request.CommandBytes,
-	}
-
-	_, err := poller.socket.Send(requestFrame)
+	_, err := poller.socket.Send(toFrame(command.Request))
 	if errors.Is(err, syscall.ENOBUFS) {
-		poller.log.Debug("sending failed, send buffer full. retrying.")
+		poller.log.Debug("sending failed. send buffer full. retrying.")
 		return sendBufferFullError{}
 	}
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
-func getNextJob(schedule []job) (nextJob *job) {
-	nextJob = &schedule[0]
-	for i := range schedule {
-		if schedule[i].nextTime.Before(nextJob.nextTime) {
-			nextJob = &schedule[i]
-		}
+func toFrame(request conf.RequestCommand) canbus.Frame {
+	return canbus.Frame{
+		ID:   uint32(request.CanId),
+		Data: request.CommandBytes,
 	}
-	return
-}
-
-func (poller *poller) createSchedule(subscriptions []Subscription) []job {
-	schedule := make([]job, len(subscriptions))
-	now := poller.clock.Now()
-	for i, subscription := range subscriptions {
-		schedule[i].subscription = subscription
-		schedule[i].nextTime = now
-	}
-	return schedule
-}
-
-func (poller *poller) schedule(job *job, duration time.Duration) {
-	job.nextTime = poller.clock.Now().Add(duration)
 }

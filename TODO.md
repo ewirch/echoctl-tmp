@@ -1,4 +1,3 @@
-- fix: mode 4: do not publish suggested_precision
 - use mqtt 5
 - expose echoctl settings in add-on
 - post device/sensor configuration to mqtt

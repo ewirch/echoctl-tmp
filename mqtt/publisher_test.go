@@ -107,7 +107,7 @@ func NewPublisher(topicPrefix string) (chan dispatcher.CommandValue, *ClientStub
 	return toPublisher, mqttClient, publisher
 }
 
-func NewLongIntCommand(id string, value uint16, divisor float32) dispatcher.CommandValue {
+func NewLongIntCommand(id string, value int16, divisor float32) dispatcher.CommandValue {
 	return dispatcher.CommandValue{
 		Cmd: conf.Command{
 			Id:      id,
@@ -118,7 +118,7 @@ func NewLongIntCommand(id string, value uint16, divisor float32) dispatcher.Comm
 	}
 }
 
-func NewValueCommand(id string, value uint16, labelMap map[string]int) dispatcher.CommandValue {
+func NewValueCommand(id string, value int16, labelMap map[string]int) dispatcher.CommandValue {
 	return dispatcher.CommandValue{
 		Cmd: conf.Command{
 			Id:        id,
@@ -129,7 +129,7 @@ func NewValueCommand(id string, value uint16, labelMap map[string]int) dispatche
 	}
 }
 
-func NewFloatCommand(id string, value uint16, divisor float32) dispatcher.CommandValue {
+func NewFloatCommand(id string, value int16, divisor float32) dispatcher.CommandValue {
 	return dispatcher.CommandValue{
 		Cmd: conf.Command{
 			Id:      id,
