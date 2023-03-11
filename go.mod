@@ -9,7 +9,6 @@ require github.com/dmarkham/enumer v1.5.7
 replace github.com/go-daq/canbus v0.2.0 => ../canbus
 
 require (
-	github.com/benbjohnson/clock v1.3.0
 	github.com/docopt/docopt-go v0.0.0-20180111231733-ee0de3bc6815
 	github.com/eclipse/paho.mqtt.golang v1.4.2
 	github.com/stretchr/testify v1.7.1

@@ -1,7 +1,6 @@
 package schedule
 
 import (
-	"github.com/benbjohnson/clock"
 	"time"
 )
 
@@ -32,7 +31,7 @@ func newForEverTimer() timer {
 }
 
 type clockTimer struct {
-	*clock.Timer
+	*time.Timer
 }
 
 func (c clockTimer) c() <-chan time.Time {
@@ -43,8 +42,8 @@ func (c clockTimer) stop() {
 	c.Stop()
 }
 
-func newClockTimer(clk clock.Clock, triggerAt time.Time) timer {
+func newTimeTimer(triggerAt time.Time) timer {
 	return &clockTimer{
-		clk.Timer(clk.Until(triggerAt)),
+		time.NewTimer(time.Until(triggerAt)),
 	}
 }

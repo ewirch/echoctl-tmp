@@ -1,7 +1,6 @@
 package schedule
 
 import (
-	"github.com/benbjohnson/clock"
 	"time"
 )
 
@@ -43,7 +42,6 @@ type scheduledItem[T any] struct {
 type scheduler[T any] struct {
 	in    chan Request[T]
 	next  chan Trigger[T]
-	clock clock.Clock
 	items []*scheduledItem[T]
 }
 
@@ -51,11 +49,10 @@ type scheduler[T any] struct {
 var _ Scheduler[int64] = (*scheduler[int64])(nil)
 
 // NewScheduler creates a new Scheduler using the given clock.
-func NewScheduler[T any](clock clock.Clock) Scheduler[T] {
+func NewScheduler[T any]() Scheduler[T] {
 	sched := scheduler[T]{
-		in:    make(chan Request[T]),
-		next:  make(chan Trigger[T]),
-		clock: clock,
+		in:   make(chan Request[T]),
+		next: make(chan Trigger[T]),
 	}
 	return &sched
 }
@@ -73,14 +70,27 @@ func (s *scheduler[T]) Run(cancel <-chan struct{}) {
 		item, timer := s.getNextItem()
 		select {
 		case triggeredAt := <-timer.c():
-			s.next <- Trigger[T]{item.data, triggeredAt}
-			s.removeItem(item)
+			if s.sendAsNext(item, triggeredAt) {
+				s.removeItem(item)
+			}
 		case scheduleRequest := <-s.in:
 			s.addItem(scheduleRequest)
 		case <-cancel:
 		}
 		timer.stop()
 	}
+}
+
+// sendAsNext passes the item parameter to the next channel. But it does so in a non-blocking way. It is possible that multiple (maybe even "many") items trigger at the same time, or close to each other, and the consuming go routine is reading the Next channel slowly, and maybe even depends on scheduler to consume from the Schedule channel at the same time. Therefore, scheduler should not block when sending to the Next channel.
+// sendAsNext returns the send status. It returns true if item was passed to next, and return false if it was not able to send (because it would otherwise block).
+func (s *scheduler[T]) sendAsNext(item *scheduledItem[T], triggeredAt time.Time) (sent bool) {
+	select {
+	case s.next <- Trigger[T]{item.data, triggeredAt}:
+		sent = true
+	default:
+		sent = false
+	}
+	return sent
 }
 
 // getNextItem returns the item from items[] with the smallest trigger time, and a timer which will trigger after the item trigger time passes. The returned item is not removed from the items[] array.
@@ -96,11 +106,11 @@ func (s *scheduler[T]) getNextItem() (*scheduledItem[T], timer) {
 			nextItem = items[i]
 		}
 	}
-	return nextItem, newClockTimer(s.clock, nextItem.triggerAt)
+	return nextItem, newTimeTimer(nextItem.triggerAt)
 }
 
 func (s *scheduler[T]) addItem(request Request[T]) {
-	item := scheduledItem[T]{data: request.Data, triggerAt: s.clock.Now().Add(request.TriggerIn)}
+	item := scheduledItem[T]{data: request.Data, triggerAt: time.Now().Add(request.TriggerIn)}
 	s.items = append(s.items, &item)
 }
 
