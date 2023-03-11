@@ -74,8 +74,8 @@ func (poller *poller) poll() error {
 }
 
 func (poller *poller) createSchedule(subscriptions []Subscription) {
-	for _, subscription := range subscriptions {
-		poller.scheduler.Schedule() <- schedule.Request[Subscription]{Data: &subscription, TriggerIn: subscription.Delay}
+	for i := range subscriptions {
+		poller.scheduler.Schedule() <- schedule.Request[Subscription]{Data: &subscriptions[i], TriggerIn: subscriptions[i].Delay}
 	}
 }
 
