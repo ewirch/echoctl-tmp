@@ -2,7 +2,7 @@ can:
   iface: can0
 
 mqtt:
-  server: tcp://192.168.2.145:1883
+  server: tcp://homeassistant:1883
   client-id: echoctl-1
   value-topic-prefix: daikin
   user: echoctl
