@@ -27,7 +27,7 @@ cansend vcan0 '180#3210FA01800100'
 cansend vcan0 '180#3210FAC0F60004'
 */
 
-const version = "1.2.6_1"
+const version = "1.2.6_2"
 const usage = `Altherma ECH₂O Control.
 
 Usage:
